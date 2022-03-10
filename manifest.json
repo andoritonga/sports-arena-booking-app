@@ -1,0 +1,16 @@
+{
+    "name": "Aplikasi Booking Lapangan",
+    "short_name": "PWA Field Book",
+    "description": "Aplikasi Booking Lapangan",
+    "start_url": "index.php",
+    "display": "standalone",
+    "background_color": "#404040",
+    "theme_color": "#ff0000",
+    "icons": [
+        {
+            "src": "frontend/img/logo.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
