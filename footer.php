@@ -9,12 +9,13 @@
 				<div class="footer">
 					<!-- footer logo -->
 					<div class="footer-logo">
-						<a class="logo" href="#">
-							<img src="frontend/img/logo.png" alt="">
+						<a class="logo-text" href="index.php" style="font-size: 24px; font-weight: 800; color: #fff; text-decoration: none;">
+							<span class="badge-icon" style="width: 36px; height: 36px; font-size: 16px;"><i class="fa fa-trophy"></i></span>
+							Sport<span class="accent">Kuy</span>
 						</a>
+						<p style="margin-top: 12px; color: #94a3b8; font-size: 13px;">Platform reservasi & booking lapangan olahraga online terpercaya.</p>
 					</div>
 					<!-- /footer logo -->
-
 				</div>
 			</div>
 			<!-- /footer widget -->
@@ -96,11 +97,22 @@
 <script src="assets/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
 
 <script src="assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-</body>
 
 <script>
-
 	$(document).ready(function(){
+
+		// User profile dropdown toggle handler
+		$(document).on('click', '.header-account .dropdown-toggle', function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+			$(this).closest('.header-account').toggleClass('open');
+		});
+
+		$(document).on('click', function(e) {
+			if (!$(e.target).closest('.header-account').length) {
+				$('.header-account.dropdown').removeClass('open');
+			}
+		});
 
 		function numberWithCommas(x) {
 			return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -150,3 +162,5 @@
     console.log("ServiceWorker belum didukung browser ini.");
   }
 </script>
+</body>
+</html>

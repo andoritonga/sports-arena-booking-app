@@ -78,15 +78,15 @@
 												<td class="text-center">
 													<?php 
 													if($i['invoice_status'] == 0){
-														echo "<span class='label label-warning'>Menunggu Pembayaran</span>";
+														echo "<span class='badge-status badge-warning'><i class='fa fa-clock-o'></i> Menunggu Pembayaran</span>";
 													}elseif($i['invoice_status'] == 1){
-														echo "<span class='label label-default'>Menunggu Konfirmasi</span>";
+														echo "<span class='badge-status badge-warning'><i class='fa fa-hourglass-half'></i> Menunggu Konfirmasi</span>";
 													}elseif($i['invoice_status'] == 2){
-														echo "<span class='label label-danger'>Ditolak</span>";
+														echo "<span class='badge-status badge-danger'><i class='fa fa-times-circle'></i> Ditolak</span>";
 													}elseif($i['invoice_status'] == 3){
-														echo "<span class='label label-primary'>Dikonfirmasi</span>";
+														echo "<span class='badge-status badge-success'><i class='fa fa-check-circle'></i> Dikonfirmasi</span>";
 													}elseif($i['invoice_status'] == 4){
-														echo "<span class='label label-success'>Selesai</span>";
+														echo "<span class='badge-status badge-success'><i class='fa fa-star'></i> Selesai</span>";
 													}
 													?>
 												</td>

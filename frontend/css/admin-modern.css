@@ -1,0 +1,812 @@
+/* =========================================================
+   SPORT-KUY ADMIN MODERN REDESIGN STYLESHEET
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --admin-font-primary: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --admin-font-heading: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  
+  --admin-bg: #f8fafc;
+  --admin-surface: #ffffff;
+  --admin-dark-bg: #0f172a;
+  --admin-sidebar-bg: #0f172a;
+  --admin-sidebar-hover: #1e293b;
+  
+  --admin-primary-gradient: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  --admin-success-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --admin-info-gradient: linear-gradient(135deg, #06b6d4 0%, #0284c7 100%);
+  --admin-warning-gradient: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  --admin-danger-gradient: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  --admin-purple-gradient: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  
+  --admin-border: #e2e8f0;
+  --admin-text-main: #1e293b;
+  --admin-text-muted: #64748b;
+  
+  --admin-radius-sm: 8px;
+  --admin-radius-md: 12px;
+  --admin-radius-lg: 16px;
+  --admin-radius-xl: 20px;
+  
+  --admin-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06);
+  --admin-shadow-hover: 0 12px 28px -6px rgba(15, 23, 42, 0.12);
+}
+
+/* Global Reset for Admin */
+body.hold-transition, body.sidebar-mini {
+  font-family: var(--admin-font-primary) !important;
+  background-color: var(--admin-bg) !important;
+  color: var(--admin-text-main) !important;
+}
+
+.content-wrapper {
+  background-color: var(--admin-bg) !important;
+  padding-bottom: 40px !important;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: var(--admin-font-heading) !important;
+  font-weight: 700 !important;
+  color: var(--admin-text-main) !important;
+}
+
+/* ---------------------------------------------------------
+   HEADER & SIDEBAR NAVIGATION
+   --------------------------------------------------------- */
+.main-header {
+  background: var(--admin-dark-bg) !important;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+}
+
+.main-header .logo {
+  background: var(--admin-dark-bg) !important;
+  font-family: var(--admin-font-heading) !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  font-size: 18px !important;
+  height: 50px !important;
+  line-height: 50px !important;
+}
+
+.main-header .navbar {
+  background: var(--admin-dark-bg) !important;
+  margin-left: 230px !important;
+}
+
+.main-header .sidebar-toggle {
+  color: #94a3b8 !important;
+  padding: 15px 20px !important;
+}
+
+.main-header .sidebar-toggle:hover {
+  background: var(--admin-sidebar-hover) !important;
+  color: #ffffff !important;
+}
+
+.main-header .navbar .nav > li > a {
+  color: #e2e8f0 !important;
+  font-weight: 600 !important;
+  padding: 15px 20px !important;
+}
+
+.main-header .navbar .nav > li > a:hover {
+  background: var(--admin-sidebar-hover) !important;
+  color: #ffffff !important;
+}
+
+/* Sidebar Styling */
+.main-sidebar {
+  background-color: var(--admin-sidebar-bg) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+  padding-top: 50px !important;
+}
+
+.user-panel {
+  padding: 15px 20px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+  margin-bottom: 10px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  clear: both !important;
+}
+
+.user-panel .image {
+  float: none !important;
+}
+
+.user-panel .image img {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  border: 2px solid #2563eb !important;
+}
+
+.user-panel .info {
+  position: static !important;
+  padding-left: 0 !important;
+}
+
+.user-panel .info p {
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  font-size: 14px !important;
+  margin: 0 0 2px 0 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.sidebar-menu > li.header {
+  color: #64748b !important;
+  background: transparent !important;
+  font-weight: 700 !important;
+  font-size: 11px !important;
+  letter-spacing: 0.08em !important;
+  padding: 12px 20px 8px 20px !important;
+}
+
+.sidebar-menu > li > a {
+  color: #94a3b8 !important;
+  font-weight: 600 !important;
+  padding: 12px 20px !important;
+  border-left: 3px solid transparent !important;
+  transition: all 0.2s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
+.sidebar-menu > li > a > i {
+  font-size: 16px !important;
+  width: 20px !important;
+  text-align: center !important;
+}
+
+.sidebar-menu > li:hover > a, .sidebar-menu > li.active > a {
+  color: #ffffff !important;
+  background: var(--admin-sidebar-hover) !important;
+  border-left-color: #2563eb !important;
+}
+
+/* ---------------------------------------------------------
+   STAT WIDGET BOXES (.small-box)
+   --------------------------------------------------------- */
+.small-box {
+  border-radius: var(--admin-radius-lg) !important;
+  box-shadow: var(--admin-shadow) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  margin-bottom: 24px !important;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+.small-box:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: var(--admin-shadow-hover) !important;
+}
+
+.small-box.bg-green {
+  background: var(--admin-success-gradient) !important;
+}
+
+.small-box.bg-red {
+  background: var(--admin-purple-gradient) !important;
+}
+
+.small-box.bg-aqua {
+  background: var(--admin-info-gradient) !important;
+}
+
+.small-box.bg-yellow {
+  background: var(--admin-warning-gradient) !important;
+}
+
+.small-box .inner {
+  padding: 24px 20px !important;
+}
+
+.small-box .inner h3 {
+  font-size: 36px !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+  margin: 0 0 6px 0 !important;
+}
+
+.small-box .inner p {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  margin: 0 !important;
+}
+
+.small-box .icon {
+  position: absolute !important;
+  top: 15px !important;
+  right: 15px !important;
+  opacity: 0.25 !important;
+  font-size: 70px !important;
+  color: #ffffff !important;
+  transition: all 0.3s ease !important;
+}
+
+.small-box:hover .icon {
+  opacity: 0.4 !important;
+  transform: scale(1.1) !important;
+}
+
+.small-box-footer {
+  background: rgba(0, 0, 0, 0.15) !important;
+  color: rgba(255, 255, 255, 0.95) !important;
+  padding: 8px 20px !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  display: block !important;
+  text-align: right !important;
+  transition: background 0.2s ease !important;
+}
+
+.small-box-footer:hover {
+  background: rgba(0, 0, 0, 0.28) !important;
+  color: #ffffff !important;
+}
+
+/* ---------------------------------------------------------
+   BOX CARDS & TABLES (.box, .table)
+   --------------------------------------------------------- */
+.box {
+  background: var(--admin-surface) !important;
+  border-radius: var(--admin-radius-lg) !important;
+  border: 1px solid var(--admin-border) !important;
+  box-shadow: var(--admin-shadow) !important;
+  margin-bottom: 24px !important;
+}
+
+.box-header {
+  padding: 20px 24px !important;
+  border-bottom: 1px solid var(--admin-border) !important;
+  background: transparent !important;
+}
+
+.box-header .box-title {
+  font-size: 18px !important;
+  font-weight: 800 !important;
+  color: var(--admin-text-main) !important;
+}
+
+.box-body {
+  padding: 24px !important;
+}
+
+/* Tables in Admin */
+.table-bordered, .table {
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  border-radius: var(--admin-radius-md) !important;
+  overflow: hidden !important;
+  border: 1px solid var(--admin-border) !important;
+  width: 100% !important;
+}
+
+.table th {
+  background: #f1f5f9 !important;
+  color: var(--admin-text-main) !important;
+  font-weight: 700 !important;
+  border-bottom: 2px solid var(--admin-border) !important;
+  padding: 12px 16px !important;
+  font-size: 13px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.03em !important;
+}
+
+.table td {
+  padding: 14px 16px !important;
+  vertical-align: middle !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+  font-size: 14px !important;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: #f8fafc !important;
+}
+
+.table tbody tr:hover {
+  background-color: #eff6ff !important;
+}
+
+/* ---------------------------------------------------------
+   BUTTONS & BADGES
+   --------------------------------------------------------- */
+.btn {
+  border-radius: var(--admin-radius-sm) !important;
+  font-weight: 700 !important;
+  padding: 8px 16px !important;
+  font-size: 13px !important;
+  transition: all 0.2s ease !important;
+  border: none !important;
+}
+
+.btn-xs {
+  padding: 5px 10px !important;
+  font-size: 11px !important;
+  border-radius: 6px !important;
+}
+
+.btn-primary {
+  background: var(--admin-primary-gradient) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25) !important;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4) !important;
+  transform: translateY(-1px) !important;
+}
+
+.btn-success {
+  background: var(--admin-success-gradient) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.25) !important;
+}
+
+.btn-danger {
+  background: var(--admin-danger-gradient) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 10px rgba(239, 68, 68, 0.25) !important;
+}
+
+.btn-info {
+  background: var(--admin-info-gradient) !important;
+  color: #ffffff !important;
+}
+
+.btn-warning {
+  background: var(--admin-warning-gradient) !important;
+  color: #ffffff !important;
+}
+
+/* Soft Badges */
+.label, .badge {
+  padding: 6px 12px !important;
+  border-radius: 9999px !important;
+  font-weight: 700 !important;
+  font-size: 11px !important;
+  letter-spacing: 0.03em !important;
+  display: inline-block !important;
+}
+
+.label-warning {
+  background: #fef3c7 !important;
+  color: #d97706 !important;
+}
+
+.label-success {
+  background: #dcfce7 !important;
+  color: #15803d !important;
+}
+
+.label-danger {
+  background: #fee2e2 !important;
+  color: #b91c1c !important;
+}
+
+.label-primary, .label-info {
+  background: #dbeafe !important;
+  color: #1d4ed8 !important;
+}
+
+.label-default {
+  background: #f1f5f9 !important;
+  color: #475569 !important;
+}
+
+/* Form Controls in Admin */
+.form-control {
+  border-radius: var(--admin-radius-md) !important;
+  border: 1px solid var(--admin-border) !important;
+  padding: 10px 14px !important;
+  font-size: 14px !important;
+  background-color: #f8fafc !important;
+  height: auto !important;
+  transition: all 0.2s ease !important;
+}
+
+.form-control:focus {
+  background-color: #ffffff !important;
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15) !important;
+}
+
+.content-header h1 {
+  font-size: 26px !important;
+  font-weight: 800 !important;
+  margin-bottom: 5px !important;
+  color: #0f172a !important;
+}
+
+/* Admin High-Contrast Text Rules */
+.content-wrapper {
+  color: #1e293b !important;
+}
+
+.box-body, .box-body p, .box-body td, .box-body label {
+  color: #1e293b !important;
+}
+
+.table th {
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+  font-weight: 700 !important;
+}
+
+.table td {
+  color: #1e293b !important;
+}
+
+.form-group label {
+  color: #0f172a !important;
+  font-weight: 700 !important;
+}
+
+.help-block, .text-muted {
+  color: #64748b !important;
+}
+
+/* Sidebar Menu High Contrast & Active Highlight */
+.sidebar-menu > li > a {
+  color: #cbd5e1 !important;
+  border-left: 3px solid transparent !important;
+  transition: all 0.2s ease !important;
+}
+
+.sidebar-menu > li:hover > a,
+.sidebar-menu > li.active > a {
+  color: #ffffff !important;
+  background: #1e293b !important;
+  border-left-color: #2563eb !important;
+}
+
+.sidebar-menu > li.active > a {
+  background: linear-gradient(90deg, rgba(37, 99, 235, 0.2) 0%, rgba(30, 41, 59, 0.6) 100%) !important;
+  font-weight: 700 !important;
+}
+
+/* Quick Action Bar */
+.admin-action-bar {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.admin-action-btn {
+  background: #ffffff;
+  border: 1px solid var(--admin-border);
+  padding: 12px 20px;
+  border-radius: var(--admin-radius-md);
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none !important;
+  box-shadow: var(--admin-shadow);
+  transition: all 0.2s ease;
+}
+
+.admin-action-btn:hover {
+  background: #eff6ff;
+  border-color: #2563eb;
+  color: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: var(--admin-shadow-hover);
+}
+
+.admin-action-btn.primary {
+  background: var(--admin-primary-gradient);
+  color: #ffffff;
+  border: none;
+}
+
+.admin-action-btn.primary:hover {
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+  color: #ffffff;
+}
+
+/* Gallery Thumbnails Pill */
+.venue-thumb-group {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+}
+
+.venue-thumb-group img {
+  width: 50px;
+  height: 38px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  transition: transform 0.2s ease;
+}
+
+.venue-thumb-group img:hover {
+  transform: scale(1.15);
+  border-color: #2563eb;
+}
+
+/* ---------------------------------------------------------
+   TRUNCATION & LAYOUT OVERFLOW CLIPPING FIXES
+   --------------------------------------------------------- */
+
+/* Table Cell Formatting & Non-Wrap Action Columns */
+.table th, .table td {
+  vertical-align: middle !important;
+  word-break: normal !important;
+}
+
+.table td.text-center, .table th.text-center {
+  text-align: center !important;
+}
+
+/* Prevent Action Cell Buttons from Clipping or Wrapping */
+.table td:last-child,
+.table td.opsi-cell,
+.table td.no-wrap {
+  white-space: nowrap !important;
+}
+
+.table td .btn-group,
+.table td form {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  flex-wrap: nowrap !important;
+}
+
+/* Compact form input inside table cells */
+.table .form-control.input-sm,
+.table select.input-sm,
+select.input-sm {
+  height: 34px !important;
+  padding: 4px 10px !important;
+  font-size: 13px !important;
+  display: inline-block !important;
+  width: auto !important;
+  vertical-align: middle !important;
+}
+
+/* DataTables Responsive Container & Scroll Fixes */
+.table-responsive {
+  width: 100% !important;
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  margin-bottom: 0 !important;
+  border: none !important;
+  padding-bottom: 8px !important;
+}
+
+.dataTables_wrapper {
+  width: 100% !important;
+  overflow-x: auto !important;
+  clear: both !important;
+}
+
+.dataTables_wrapper .dataTables_filter {
+  float: right !important;
+  margin-bottom: 14px !important;
+}
+
+.dataTables_wrapper .dataTables_filter label {
+  font-weight: 700 !important;
+  color: #0f172a !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+  border-radius: var(--admin-radius-sm) !important;
+  border: 1px solid var(--admin-border) !important;
+  padding: 6px 12px !important;
+  font-size: 13px !important;
+  margin-left: 6px !important;
+}
+
+.dataTables_wrapper .dataTables_length {
+  float: left !important;
+  margin-bottom: 14px !important;
+}
+
+.dataTables_wrapper .dataTables_length label {
+  font-weight: 700 !important;
+  color: #0f172a !important;
+}
+
+.dataTables_wrapper .dataTables_info {
+  padding-top: 14px !important;
+  color: #64748b !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+  float: right !important;
+  padding-top: 10px !important;
+}
+
+/* Stat Box Header H3 Responsive Scaling */
+.small-box .inner h3 {
+  font-size: clamp(20px, 2.5vw, 32px) !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+  margin: 0 0 6px 0 !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+}
+
+/* Modal Dialog & Image Overflow Fix */
+.modal-dialog {
+  max-width: 650px !important;
+  width: 92% !important;
+  margin: 30px auto !important;
+}
+
+.modal-content {
+  border-radius: var(--admin-radius-lg) !important;
+  border: none !important;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.2) !important;
+  overflow: hidden !important;
+}
+
+.modal-body img {
+  max-width: 100% !important;
+  height: auto !important;
+  border-radius: 12px !important;
+}
+
+/* ---------------------------------------------------------
+   ADMINLTE CORE LAYOUT & SIDEBAR MARGIN FIXES
+   --------------------------------------------------------- */
+
+/* Ensure wrapper container takes full viewport */
+.wrapper {
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  position: relative !important;
+  min-height: 100vh !important;
+}
+
+/* Sidebar styling & fixed width */
+.main-sidebar {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 230px !important;
+  padding-top: 50px !important;
+  min-height: 100% !important;
+  z-index: 810 !important;
+  background-color: var(--admin-sidebar-bg) !important;
+  transition: transform 0.3s ease-in-out, width 0.3s ease-in-out !important;
+}
+
+/* Header Navbar Left Margin */
+.main-header {
+  position: relative !important;
+  max-height: 50px !important;
+  z-index: 1030 !important;
+}
+
+.main-header .logo {
+  width: 230px !important;
+  transition: width 0.3s ease-in-out !important;
+}
+
+.main-header .navbar {
+  margin-left: 230px !important;
+  transition: margin-left 0.3s ease-in-out !important;
+}
+
+/* Content Wrapper Left Margin MUST BE 230px when sidebar is open! */
+.content-wrapper,
+.main-footer {
+  margin-left: 230px !important;
+  transition: margin-left 0.3s ease-in-out !important;
+  box-sizing: border-box !important;
+  min-height: 100vh !important;
+  background-color: var(--admin-bg) !important;
+  z-index: 800 !important;
+}
+
+/* Sidebar Collapsed State (Mini Sidebar) */
+body.sidebar-collapse .main-sidebar {
+  width: 50px !important;
+}
+
+body.sidebar-collapse .main-header .logo {
+  width: 50px !important;
+  padding: 0 !important;
+}
+
+body.sidebar-collapse .main-header .navbar {
+  margin-left: 50px !important;
+}
+
+body.sidebar-collapse .content-wrapper,
+body.sidebar-collapse .main-footer {
+  margin-left: 50px !important;
+}
+
+/* Mobile Screens (Width < 768px) */
+@media (max-width: 767px) {
+  .main-sidebar {
+    transform: translate(-230px, 0) !important;
+  }
+  .main-header .logo {
+    width: 100% !important;
+  }
+  .main-header .navbar {
+    margin-left: 0 !important;
+  }
+  .content-wrapper,
+  .main-footer {
+    margin-left: 0 !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+  body.sidebar-open .main-sidebar {
+    transform: translate(0, 0) !important;
+  }
+  body.sidebar-open .content-wrapper {
+    transform: translate(230px, 0) !important;
+  }
+  .box-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+  .dataTables_wrapper .dataTables_filter,
+  .dataTables_wrapper .dataTables_length,
+  .dataTables_wrapper .dataTables_paginate {
+    float: none !important;
+    text-align: left !important;
+    margin-bottom: 10px !important;
+  }
+}
+
+/* Bootstrap Datepicker Modern Overlay Styling */
+.datepicker-dropdown {
+  border-radius: var(--admin-radius-md) !important;
+  border: 1px solid var(--admin-border) !important;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15) !important;
+  padding: 12px !important;
+  background: #ffffff !important;
+  font-family: var(--admin-font-primary) !important;
+  z-index: 1050 !important;
+}
+
+.datepicker table tr td.active.active,
+.datepicker table tr td.active.highlighted.active,
+.datepicker table tr td.active:hover {
+  background-color: #2563eb !important;
+  background-image: none !important;
+  border-radius: 8px !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+.datepicker table tr td.day:hover {
+  background: #eff6ff !important;
+  border-radius: 8px !important;
+}
+
+

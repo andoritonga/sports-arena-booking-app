@@ -1,7 +1,9 @@
 <?php
 include 'koneksi.php';
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 $file = basename($_SERVER['PHP_SELF']);
 
@@ -71,13 +73,14 @@ function console_log( $dataa ){
 	<link rel="stylesheet" href="frontend/css/font-awesome.min.css">
 
 	<!-- Custom stlylesheet -->
-	<link type="text/css" rel="stylesheet" href="frontend/css/style.css" />
+	<link type="text/css" rel="stylesheet" href="frontend/css/style.css?v=5.0" />
+	<link type="text/css" rel="stylesheet" href="frontend/css/modern-custom.css?v=5.0" />
 
 	<link rel="stylesheet" href="assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
   	<link rel="stylesheet" href="assets/bower_components/bootstrap-daterangepicker/daterangepicker.css">
 	  <script src="frontend/js/jquery.min.js"></script>
         <script src="frontend/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
         <style type="text/css">
             .preloader {
                 position: fixed;
@@ -86,100 +89,92 @@ function console_log( $dataa ){
                 width: 100%;
                 height: 100%;
                 z-index: 9999;
-                background-color: #fff;
+                background-color: #0f172a;
             }
             .preloader .loading {
                 position: absolute;
                 left: 50%;
                 top: 50%;
                 transform: translate(-50%,-50%);
-                font: 14px arial;
+                color: #ffffff;
             }
             .spinner {
                 display: none;
             }
         </style>
         <script>
-            $(window).load(function() {
+            $(window).on('load', function() {
                 $(".preloader").fadeOut("slow");
             });
         </script> 
 </head>
 
 <body>
+	<div class="preloader">
+		<div class="loading">
+			<img src="gambar/sistem/loading.gif" width="80">
+		</div>
+	</div>
 
-	<style>
-		.product-name {
-			height: 5px;
-		}
-	</style>
 	<!-- HEADER -->
-	<header>
-		
-		<!-- header -->
-		<div id="header">
-			<div class="container">
-				<div class="preloader">
-            		<div class="loading">
-                		<div class="spinner-border" role="status">
-                    		<span class="sr-only">Loading...</span>
-                		</div>
-            		</div>
-       		 	</div>
-				<div class="pull-left">
-					<!-- Logo -->
-					<div class="header-logo">
-						<a class="logo" href="index.php">
-							<img src="frontend/img/logo.png" alt="">
+	<header id="header">
+		<!-- container -->
+		<div class="container">
+
+			<!-- header -->
+			<div class="header-logo">
+				<a class="logo-text" href="index.php">
+					<span class="badge-icon"><i class="fa fa-soccer-ball-o"></i></span>
+					SPORT<span class="accent">KUY</span>
+				</a>
+			</div>
+			<!-- /logo -->
+
+			<div class="header-btns pull-right">
+				<?php 
+				if(isset($_SESSION['customer_status'])){
+					$id_customer = $_SESSION['customer_id'];
+					$customer = mysqli_query($koneksi,"select * from customer where customer_id='$id_customer'");
+					$c = mysqli_fetch_assoc($customer);
+					?>
+					<div class="header-account dropdown default-dropdown">
+						<a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false" style="text-decoration: none;">
+							<div class="header-btns-icon">
+								<i class="fa fa-user"></i>
+							</div>
+							<strong class="text-uppercase" style="color: #ffffff; font-weight: 700;"><?php echo $c['customer_nama']; ?> <i class="fa fa-caret-down" style="margin-left: 4px;"></i></strong>
+						</a>
+						
+						<ul class="custom-menu">
+							<li><a href="customer.php"><i class="fa fa-user" style="color: var(--color-brand-primary);"></i> Dashboard</a></li>
+							<li><a href="customer_pesanan.php"><i class="fa fa-list-alt" style="color: var(--color-brand-primary);"></i> Pesanan Saya</a></li>
+							<li><a href="customer_password.php"><i class="fa fa-key" style="color: var(--color-brand-primary);"></i> Ganti Password</a></li>
+							<li style="border-top: 1px solid #f1f5f9;"><a href="customer_logout.php" style="color: #ef4444 !important;"><i class="fa fa-sign-out" style="color: #ef4444;"></i> Keluar</a></li>
+						</ul>
+					</div>
+					<?php
+				}else{
+					?>
+					<div class="header-account default-dropdown">
+						<a href="masuk.php" class="btn-modern btn-modern-primary" style="display: flex; align-items: center; gap: 8px;">
+							<i class="fa fa-sign-in"></i> LOGIN
 						</a>
 					</div>
-					<!-- /Logo -->
-				</div>
-				<div class="pull-right">
-					<ul class="header-btns">
-						<?php 
-						if(isset($_SESSION['customer_status'])){
-							$id_customer = $_SESSION['customer_id'];
-							$customer = mysqli_query($koneksi,"select * from customer where customer_id='$id_customer'");
-							$c = mysqli_fetch_assoc($customer);
-							?>
-							<!-- Account -->
-							<li class="header-account dropdown default-dropdown" style="min-width: 200px">
-								<div class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true">
-									<div class="header-btns-icon">
-										<i class="fa fa-user-o"></i>
-									</div>
-									<strong class="text-uppercase"><?php echo $c['customer_nama']; ?></strong>
-								</div>
-								<span><?php echo $c['customer_email']; ?></span>
-								<ul class="custom-menu">
-									<li><a href="customer.php"><i class="fa fa-user-o"></i> Akun Saya</a></li>
-									<li><a href="customer_pesanan.php"><i class="fa fa-list"></i> Pesanan Saya</a></li>
-									<li><a href="customer_password.php"><i class="fa fa-lock"></i> Ganti Password</a></li>
-									<li><a href="customer_logout.php"><i class="fa fa-sign-out"></i> Keluar</a></li>
-								</ul>
-							</li>
-							<!-- /Account -->
-							<?php
-						}else{
-							?>
-							<li class="header-account dropdown default-dropdown">
-								<a href="masuk.php" class="text-uppercase main-btn">Login</a> 
-								<a href="daftar.php" class="text-uppercase primary-btn">Daftar</a> 
-							</li>
-							<?php
-						}
-						?>
+					<div class="header-account default-dropdown">
+						<a href="daftar.php" class="btn-modern btn-modern-outline" style="display: flex; align-items: center; gap: 8px;">
+							<i class="fa fa-user-plus"></i> DAFTAR
+						</a>
+					</div>
+					<?php
+				}
+				?>
 
-						<!-- Mobile nav toggle-->
-						<li class="nav-toggle">
-							<button class="nav-toggle-btn main-btn icon-btn"><i class="fa fa-bars"></i></button>
-						</li>
-						<!-- / Mobile nav toggle -->
-					</ul>
-				</div>
+				<!-- Mobile nav toggle-->
+				<li class="nav-toggle">
+					<button class="nav-toggle-btn main-btn icon-btn"><i class="fa fa-bars"></i></button>
+				</li>
+				<!-- / Mobile nav toggle -->
 			</div>
-			<!-- header -->
 		</div>
 		<!-- container -->
 	</header>
@@ -202,7 +197,7 @@ function console_log( $dataa ){
 							<?php 
 						}
 						?>
-						<li style="background: #999;"><a href="index.php" style="color: white">Tampilkan Semua</a></li>
+						<li class="all-categories-item"><a href="index.php"><i class="fa fa-th-large"></i> Tampilkan Semua</a></li>
 					</ul>
 				</div>
 				<!-- /category nav -->
@@ -213,7 +208,6 @@ function console_log( $dataa ){
 					<ul class="menu-list">
 						<li><a href="index.php">Home</a></li>
 						<li><a href="about.php">About Us</a></li>
-						<li><a href="login.php">Login Admin</a></li>
 					</ul>
 				</div>
 				<!-- menu nav -->
