@@ -176,37 +176,72 @@ if($d = mysqli_fetch_array($data)){
 
 							<!-- TIME SLOTS 2D GRID -->
 							<?php
-							// Database auto-populate if missing for date
-							$cekjadwal = mysqli_query($koneksi,"select * from jadwal WHERE jadwal_lapangan = '$id_lapangan' AND jadwal_tanggal = '$tanggal'");
-							$z = mysqli_fetch_all($cekjadwal);
-							if (count($z) == 0){
-								mysqli_query($koneksi, "insert into jadwal values(NULL ,'$id_lapangan','$tanggal','08.00','09.00',DEFAULT), (NULL ,'$id_lapangan','$tanggal','09.00','10.00',DEFAULT),(NULL ,'$id_lapangan','$tanggal','10.00','11.00',DEFAULT),(NULL ,'$id_lapangan','$tanggal','11.00','12.00',DEFAULT),(NULL ,'$id_lapangan','$tanggal','12.00','13.00',DEFAULT),(NULL ,'$id_lapangan','$tanggal','13.00','14.00',DEFAULT),(NULL ,'$id_lapangan','$tanggal','14.00','15.00',DEFAULT),(NULL ,'$id_lapangan','$tanggal','15.00','16.00',DEFAULT),(NULL ,'$id_lapangan','$tanggal','16.00','17.00',DEFAULT),(NULL ,'$id_lapangan','$tanggal','17.00','18.00',DEFAULT),(NULL ,'$id_lapangan','$tanggal','18.00','19.00',DEFAULT),(NULL ,'$id_lapangan','$tanggal','19.00','20.00',DEFAULT),(NULL ,'$id_lapangan','$tanggal','20.00','21.00',DEFAULT),(NULL ,'$id_lapangan','$tanggal','21.00','22.00',DEFAULT),(NULL ,'$id_lapangan','$tanggal','22.00','23.00',DEFAULT)")or die(mysqli_error($koneksi));
+							// Real-time booking conflict detection from invoice table
+							$booked_hours = array();
+							$inv_check = mysqli_query($koneksi, "SELECT invoice_jam_mulai, invoice_jam_selesai FROM invoice 
+								WHERE invoice_lapangan = '$id_lapangan' 
+								AND invoice_tgl_main = '$tanggal' 
+								AND invoice_status != '2'");
+
+							if($inv_check) {
+								while($b = mysqli_fetch_assoc($inv_check)) {
+									$s_int = (int)substr($b['invoice_jam_mulai'], 0, 2);
+									$e_int = (int)substr($b['invoice_jam_selesai'], 0, 2);
+									for($h = $s_int; $h < $e_int; $h++) {
+										$booked_hours[$h] = true;
+									}
+								}
 							}
 
-							$jadwal = mysqli_query($koneksi,"select * from jadwal WHERE jadwal_lapangan = '$id_lapangan' AND jadwal_tanggal = '$tanggal' order by jadwal_id asc");
-							
-							$total_slots = 0;
+							$slots_data = array();
 							$available_slots = 0;
 							$booked_slots = 0;
-							
-							$slots_data = array();
-							while($x = mysqli_fetch_array($jadwal)){
-								$slots_data[] = $x;
-								$total_slots++;
-								if($x['jadwal_status'] == "SUDAH DIPESAN") { $booked_slots++; }
-								else { $available_slots++; }
+
+							for($h = 8; $h <= 22; $h++) {
+								$start_str = sprintf("%02d.00", $h);
+								$end_str = sprintf("%02d.00", $h + 1);
+								$is_booked = isset($booked_hours[$h]);
+
+								if($is_booked) { 
+									$booked_slots++; 
+								} else { 
+									$available_slots++; 
+								}
+
+								$period = "pagi";
+								if($h >= 12 && $h < 17) { $period = "siang"; }
+								else if($h >= 17) { $period = "malam"; }
+
+								$slots_data[] = array(
+									'hour' => $h,
+									'mulai' => $start_str,
+									'selesai' => $end_str,
+									'is_booked' => $is_booked,
+									'period' => $period
+								);
 							}
 							?>
 
-							<!-- SLOT SUMMARY STATS BANNER -->
-							<div style="display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;">
-								<div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: var(--radius-md); padding: 8px 16px; font-weight: 700; color: #166534; font-size: 13px; display: inline-flex; align-items: center; gap: 6px;">
-									<span style="width: 8px; height: 8px; background: #22c55e; border-radius: 50%; display: inline-block;"></span>
-									<?php echo $available_slots; ?> Sesi Tersedia
+							<?php if(isset($_GET['alert']) && $_GET['alert'] == "bentrok") { ?>
+								<div class="alert alert-danger" style="border-radius: var(--radius-md); font-weight: 700; margin-bottom: 20px;">
+									<i class="fa fa-exclamation-triangle"></i> Maaf, sesi yang Anda pilih sudah terisi oleh pemesan lain. Silakan pilih jam atau tanggal yang masih tersedia.
 								</div>
-								<div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: var(--radius-md); padding: 8px 16px; font-weight: 700; color: #991b1b; font-size: 13px; display: inline-flex; align-items: center; gap: 6px;">
-									<span style="width: 8px; height: 8px; background: #ef4444; border-radius: 50%; display: inline-block;"></span>
-									<?php echo $booked_slots; ?> Sesi Terisi
+							<?php } ?>
+
+							<!-- SLOT SUMMARY STATS BANNER -->
+							<div style="display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; justify-content: space-between; align-items: center;">
+								<div style="display: flex; gap: 10px; flex-wrap: wrap;">
+									<div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: var(--radius-md); padding: 8px 16px; font-weight: 700; color: #166534; font-size: 13px; display: inline-flex; align-items: center; gap: 6px;">
+										<span style="width: 8px; height: 8px; background: #22c55e; border-radius: 50%; display: inline-block;"></span>
+										<?php echo $available_slots; ?> Sesi Tersedia
+									</div>
+									<div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: var(--radius-md); padding: 8px 16px; font-weight: 700; color: #991b1b; font-size: 13px; display: inline-flex; align-items: center; gap: 6px;">
+										<span style="width: 8px; height: 8px; background: #ef4444; border-radius: 50%; display: inline-block;"></span>
+										<?php echo $booked_slots; ?> Sesi Terisi
+									</div>
+								</div>
+								<div style="color: #64748b; font-size: 13px; font-weight: 600;">
+									<i class="fa fa-info-circle" style="color: var(--color-brand-primary);"></i> Klik slot untuk memilih sesi (bisa pilih lebih dari 1 jam berurutan).
 								</div>
 							</div>
 
@@ -214,25 +249,22 @@ if($d = mysqli_fetch_array($data)){
 							<div class="slot-grid" id="slots-container">
 								<?php
 								foreach($slots_data as $x){
-									$jam_int = (int)substr($x['jadwal_mulai'], 0, 2);
-									
-									// Category filter tag
-									$period = "pagi";
-									if($jam_int >= 12 && $jam_int < 17) { $period = "siang"; }
-									else if($jam_int >= 17) { $period = "malam"; }
-
-									$is_booked = ($x['jadwal_status'] == "SUDAH DIPESAN");
-									$card_class = $is_booked ? "booked" : "available";
+									$card_class = $x['is_booked'] ? "booked" : "available";
 								?>
-									<div class="slot-card <?php echo $card_class; ?>" data-period="<?php echo $period; ?>">
+									<div class="slot-card <?php echo $card_class; ?>" 
+										 data-hour="<?php echo $x['hour']; ?>" 
+										 data-start="<?php echo $x['mulai']; ?>" 
+										 data-end="<?php echo $x['selesai']; ?>" 
+										 data-period="<?php echo $x['period']; ?>"
+										 <?php if(!$x['is_booked']){ ?>onclick="toggleSlot(<?php echo $x['hour']; ?>, this)"<?php } ?>>
 										<div>
 											<div class="slot-time">
-												<i class="fa fa-clock-o" style="color: <?php echo $is_booked ? '#cbd5e1' : '#2563eb'; ?>;"></i>
-												<?php echo $x['jadwal_mulai']; ?> - <?php echo $x['jadwal_selesai']; ?>
+												<i class="fa fa-clock-o" style="color: <?php echo $x['is_booked'] ? '#cbd5e1' : '#2563eb'; ?>;"></i>
+												<?php echo $x['mulai']; ?> - <?php echo $x['selesai']; ?>
 											</div>
 
 											<div class="slot-tag">
-												<?php if($is_booked) { ?>
+												<?php if($x['is_booked']) { ?>
 													<i class="fa fa-lock"></i> Terisi
 												<?php } else { ?>
 													<i class="fa fa-circle" style="font-size: 6px; color: #22c55e;"></i> Rp <?php echo number_format($d['lapangan_harga']/1000); ?>k
@@ -241,16 +273,47 @@ if($d = mysqli_fetch_array($data)){
 										</div>
 
 										<div>
-											<?php if($is_booked) { ?>
+											<?php if($x['is_booked']) { ?>
 												<button class="slot-btn" disabled><i class="fa fa-ban"></i> Terisi</button>
 											<?php } else { ?>
-												<a href="checkout.php?id=<?php echo $d['lapangan_id']; ?>" class="slot-btn">
-													Pesan Sesi <i class="fa fa-chevron-right" style="font-size: 10px;"></i>
-												</a>
+												<button type="button" class="slot-btn slot-action-text">
+													<i class="fa fa-plus-circle"></i> Pilih Sesi
+												</button>
 											<?php } ?>
 										</div>
 									</div>
 								<?php } ?>
+							</div>
+
+							<!-- LIVE INTERACTIVE BOOKING BAR -->
+							<div class="slot-selection-bar" id="selection-bar">
+								<div class="slot-selection-info">
+									<div class="slot-selection-stat">
+										<h5><i class="fa fa-calendar" style="color: #38bdf8;"></i> Tanggal Main</h5>
+										<div class="val"><?php echo DateToIndo($tanggal); ?></div>
+									</div>
+
+									<div class="slot-selection-stat">
+										<h5><i class="fa fa-clock-o" style="color: #38bdf8;"></i> Sesi Jam Terpilih</h5>
+										<div class="val" id="selected-time-display" style="color: #cbd5e1; font-size: 14px;">Belum ada sesi dipilih</div>
+									</div>
+
+									<div class="slot-selection-stat">
+										<h5><i class="fa fa-hourglass-half" style="color: #38bdf8;"></i> Durasi</h5>
+										<div class="val" id="selected-dur-display" style="color: #cbd5e1; font-size: 14px;">0 Jam</div>
+									</div>
+
+									<div class="slot-selection-stat">
+										<h5><i class="fa fa-tag" style="color: #38bdf8;"></i> Total Estimasi Biaya</h5>
+										<div class="val price" id="selected-price-display">Rp 0</div>
+									</div>
+								</div>
+
+								<div>
+									<a href="#" id="btn-booking-proceed" class="slot-selection-btn disabled" onclick="proceedToBooking(event)">
+										Lanjut ke Booking <i class="fa fa-arrow-right"></i>
+									</a>
+								</div>
 							</div>
 
 						</div>
@@ -334,6 +397,97 @@ if($d = mysqli_fetch_array($data)){
 </div>
 
 <script>
+var pricePerHour = <?php echo (int)$d['lapangan_harga']; ?>;
+var idLapangan = <?php echo (int)$d['lapangan_id']; ?>;
+var selectedDate = "<?php echo $tanggal; ?>";
+var selectedHours = [];
+
+function toggleSlot(hour, el) {
+	var idx = selectedHours.indexOf(hour);
+	if (idx > -1) {
+		// Deselect clicked slot
+		selectedHours.splice(idx, 1);
+	} else {
+		if (selectedHours.length === 0) {
+			selectedHours.push(hour);
+		} else {
+			// Check if we can form a contiguous range without hitting any booked slot
+			var minH = Math.min(...selectedHours, hour);
+			var maxH = Math.max(...selectedHours, hour);
+			var canSelectRange = true;
+			var newRange = [];
+			for (var h = minH; h <= maxH; h++) {
+				var card = document.querySelector('.slot-card[data-hour="' + h + '"]');
+				if (!card || card.classList.contains('booked')) {
+					canSelectRange = false;
+					break;
+				}
+				newRange.push(h);
+			}
+			if (canSelectRange) {
+				selectedHours = newRange;
+			} else {
+				// If a booked slot interrupts the range, start a fresh single selection
+				selectedHours = [hour];
+			}
+		}
+	}
+	updateSlotUI();
+}
+
+function updateSlotUI() {
+	document.querySelectorAll('.slot-card.available').forEach(function(card) {
+		var h = parseInt(card.getAttribute('data-hour'));
+		var btn = card.querySelector('.slot-action-text');
+		if (selectedHours.indexOf(h) > -1) {
+			card.classList.add('selected');
+			if(btn) btn.innerHTML = '<i class="fa fa-check-circle"></i> Dipilih';
+		} else {
+			card.classList.remove('selected');
+			if(btn) btn.innerHTML = '<i class="fa fa-plus-circle"></i> Pilih Sesi';
+		}
+	});
+
+	var timeDisplay = document.getElementById('selected-time-display');
+	var durDisplay = document.getElementById('selected-dur-display');
+	var priceDisplay = document.getElementById('selected-price-display');
+	var btn = document.getElementById('btn-booking-proceed');
+
+	if (selectedHours.length > 0) {
+		selectedHours.sort(function(a,b){ return a-b; });
+		var minH = selectedHours[0];
+		var maxH = selectedHours[selectedHours.length - 1] + 1;
+		var startStr = (minH < 10 ? '0' + minH : minH) + '.00';
+		var endStr = (maxH < 10 ? '0' + maxH : maxH) + '.00';
+		var dur = selectedHours.length;
+		var total = dur * pricePerHour;
+
+		timeDisplay.innerHTML = '<span style="color: #ffffff; font-weight: 800;">' + startStr + ' - ' + endStr + '</span>';
+		durDisplay.innerHTML = '<span style="color: #ffffff; font-weight: 800;">' + dur + ' Jam</span>';
+		priceDisplay.innerText = 'Rp ' + total.toLocaleString('id-ID');
+		btn.classList.remove('disabled');
+	} else {
+		timeDisplay.innerHTML = '<span style="color: #94a3b8;">Belum ada sesi dipilih</span>';
+		durDisplay.innerHTML = '<span style="color: #94a3b8;">0 Jam</span>';
+		priceDisplay.innerText = 'Rp 0';
+		btn.classList.add('disabled');
+	}
+}
+
+function proceedToBooking(e) {
+	if (selectedHours.length === 0) {
+		e.preventDefault();
+		alert('Silakan pilih minimal 1 sesi bermain terlebih dahulu.');
+		return false;
+	}
+	selectedHours.sort(function(a,b){ return a-b; });
+	var minH = selectedHours[0];
+	var maxH = selectedHours[selectedHours.length - 1] + 1;
+	var startStr = (minH < 10 ? '0' + minH : minH) + '.00';
+	var endStr = (maxH < 10 ? '0' + maxH : maxH) + '.00';
+	window.location.href = 'checkout.php?id=' + idLapangan + '&tgl=' + selectedDate + '&start=' + startStr + '&end=' + endStr;
+}
+
 function filterSlots(period, btn) {
 	// Update active filter chip
 	var chips = document.querySelectorAll('.time-chip');

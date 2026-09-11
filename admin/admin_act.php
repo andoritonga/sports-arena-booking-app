@@ -1,8 +1,9 @@
 <?php 
 include '../koneksi.php';
-$nama  = $_POST['nama'];
-$username = $_POST['username'];
-$password = md5($_POST['password']);
+$nama  = mysqli_real_escape_string($koneksi, $_POST['nama']);
+$username = mysqli_real_escape_string($koneksi, $_POST['username']);
+$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
 
 $rand = rand();
 $allowed =  array('gif','png','jpg','jpeg');

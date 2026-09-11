@@ -32,7 +32,7 @@
 							if(isset($_GET['alert'])){
 								if($_GET['alert'] == "gagal"){
 									echo "<div class='alert alert-danger'>Gambar gagal diupload!</div>";
-								}elseif($_GET['alert'] == "sukses"){
+								}elseif($_GET['alert'] == "sukses" || $_GET['alert'] == "sukses_booking"){
 									echo "<div class='alert alert-success'>Pesanan berhasil dibuat, silahkan melakukan pembayaran!</div>";
 								}elseif($_GET['alert'] == "upload"){
 									echo "<div class='alert alert-success'>Konfirmasi pembayaran berhasil tersimpan, silahkan menunggu konfirmasi dari admin!</div>";

@@ -1,10 +1,11 @@
 <?php 
 include '../koneksi.php';
-$id  = $_POST['id'];
-$nama  = $_POST['nama'];
-$username = $_POST['username'];
+$id  = mysqli_real_escape_string($koneksi, $_POST['id']);
+$nama  = mysqli_real_escape_string($koneksi, $_POST['nama']);
+$username = mysqli_real_escape_string($koneksi, $_POST['username']);
 $pwd = $_POST['password'];
-$password = md5($_POST['password']);
+$password = !empty($pwd) ? password_hash($pwd, PASSWORD_DEFAULT) : '';
+
 
 // cek gambar
 $rand = rand();
