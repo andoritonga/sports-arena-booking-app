@@ -289,22 +289,22 @@ if($d = mysqli_fetch_array($data)){
 							<div class="slot-selection-bar" id="selection-bar">
 								<div class="slot-selection-info">
 									<div class="slot-selection-stat">
-										<h5><i class="fa fa-calendar" style="color: #38bdf8;"></i> Tanggal Main</h5>
+										<h5 style="color: #cbd5e1 !important; margin: 0 0 4px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700;"><i class="fa fa-calendar" style="color: #38bdf8;"></i> Tanggal Main</h5>
 										<div class="val"><?php echo DateToIndo($tanggal); ?></div>
 									</div>
 
 									<div class="slot-selection-stat">
-										<h5><i class="fa fa-clock-o" style="color: #38bdf8;"></i> Sesi Jam Terpilih</h5>
+										<h5 style="color: #cbd5e1 !important; margin: 0 0 4px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700;"><i class="fa fa-clock-o" style="color: #38bdf8;"></i> Sesi Jam Terpilih</h5>
 										<div class="val" id="selected-time-display" style="color: #cbd5e1; font-size: 14px;">Belum ada sesi dipilih</div>
 									</div>
 
 									<div class="slot-selection-stat">
-										<h5><i class="fa fa-hourglass-half" style="color: #38bdf8;"></i> Durasi</h5>
+										<h5 style="color: #cbd5e1 !important; margin: 0 0 4px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700;"><i class="fa fa-hourglass-half" style="color: #38bdf8;"></i> Durasi</h5>
 										<div class="val" id="selected-dur-display" style="color: #cbd5e1; font-size: 14px;">0 Jam</div>
 									</div>
 
 									<div class="slot-selection-stat">
-										<h5><i class="fa fa-tag" style="color: #38bdf8;"></i> Total Estimasi Biaya</h5>
+										<h5 style="color: #cbd5e1 !important; margin: 0 0 4px 0; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700;"><i class="fa fa-tag" style="color: #38bdf8;"></i> Total Estimasi Biaya</h5>
 										<div class="val price" id="selected-price-display">Rp 0</div>
 									</div>
 								</div>

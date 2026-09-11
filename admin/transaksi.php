@@ -121,7 +121,14 @@
                                   echo "<div class='alert alert-warning' style='margin: 0;'><i class='fa fa-info-circle'></i> Bukti pembayaran belum diupload oleh pembeli/customer.</div>";
                                 }else{
                                   ?>
-                                  <img src="../gambar/bukti/<?php echo $i['invoice_bukti']; ?>" style="max-width: 100%; max-height: 450px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
+                                  <div style="background: #f8fafc; padding: 12px; border-radius: 12px; border: 1px solid #e2e8f0; display: inline-block; max-width: 100%;">
+                                    <img src="../gambar/bukti_pembayaran/<?php echo $i['invoice_bukti']; ?>" alt="Bukti Pembayaran #INV-<?php echo $i['invoice_id']; ?>" style="max-width: 100%; max-height: 450px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); object-fit: contain;">
+                                    <div style="margin-top: 12px;">
+                                      <a href="../gambar/bukti_pembayaran/<?php echo $i['invoice_bukti']; ?>" target="_blank" class="btn btn-sm btn-primary" style="font-weight: 700; border-radius: 8px;">
+                                        <i class="fa fa-external-link"></i> Buka Gambar Ukuran Penuh
+                                      </a>
+                                    </div>
+                                  </div>
                                   <?php
                                 }
                                 ?>

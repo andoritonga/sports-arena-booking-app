@@ -903,25 +903,31 @@ hr {
   flex-wrap: wrap;
 }
 
+.slot-selection-bar h1,
+.slot-selection-bar h2,
+.slot-selection-bar h3,
+.slot-selection-bar h4,
+.slot-selection-bar h5,
+.slot-selection-bar h6,
 .slot-selection-stat h5 {
-  margin: 0 0 4px 0;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: #94a3b8;
-  font-weight: 700;
+  margin: 0 0 4px 0 !important;
+  font-size: 11px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  color: #cbd5e1 !important;
+  font-weight: 700 !important;
 }
 
 .slot-selection-stat .val {
-  font-size: 15px;
-  font-weight: 800;
-  color: #ffffff;
-  font-family: var(--font-heading);
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+  font-family: var(--font-heading) !important;
 }
 
 .slot-selection-stat .val.price {
-  color: #38bdf8;
-  font-size: 22px;
+  color: #38bdf8 !important;
+  font-size: 22px !important;
 }
 
 .slot-selection-btn {
@@ -949,8 +955,9 @@ hr {
 
 .slot-selection-btn.disabled,
 .slot-selection-btn:disabled {
-  background: #475569 !important;
+  background: rgba(255, 255, 255, 0.08) !important;
   color: #94a3b8 !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
   cursor: not-allowed !important;
   box-shadow: none !important;
   transform: none !important;

@@ -88,31 +88,65 @@ function console_log( $dataa ){
                 left: 0;
                 width: 100%;
                 height: 100%;
-                z-index: 9999;
-                background-color: #0f172a;
+                z-index: 99999;
+                background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
-            .preloader .loading {
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%,-50%);
+            .preloader-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 16px;
+                text-align: center;
+            }
+            .modern-spinner {
+                width: 50px;
+                height: 50px;
+                border: 4px solid rgba(255, 255, 255, 0.12);
+                border-top: 4px solid #2563eb;
+                border-right: 4px solid #38bdf8;
+                border-radius: 50%;
+                animation: spinLoader 0.85s cubic-bezier(0.5, 0.1, 0.5, 0.9) infinite;
+                box-shadow: 0 0 25px rgba(37, 99, 235, 0.35);
+            }
+            @keyframes spinLoader {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+            .preloader-brand {
                 color: #ffffff;
+                font-family: 'Outfit', sans-serif;
+                font-size: 16px;
+                font-weight: 800;
+                letter-spacing: 0.15em;
+                text-transform: uppercase;
             }
-            .spinner {
-                display: none;
+            .preloader-brand span {
+                color: #38bdf8;
             }
         </style>
         <script>
-            $(window).on('load', function() {
-                $(".preloader").fadeOut("slow");
+            $(document).ready(function() {
+                var preloaderHidden = false;
+                function hidePreloader() {
+                    if (!preloaderHidden) {
+                        preloaderHidden = true;
+                        $(".preloader").fadeOut(350);
+                    }
+                }
+                $(window).on('load', hidePreloader);
+                setTimeout(hidePreloader, 700);
             });
         </script> 
 </head>
 
 <body>
 	<div class="preloader">
-		<div class="loading">
-			<img src="gambar/sistem/loading.gif" width="80">
+		<div class="preloader-content">
+			<div class="modern-spinner"></div>
+			<div class="preloader-brand">SPORT <span>KUY</span></div>
 		</div>
 	</div>
 

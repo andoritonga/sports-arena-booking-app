@@ -36,8 +36,16 @@ session_start();
             }
         </style>
         <script>
-            $(window).load(function() {
-                $(".preloader").fadeOut("slow");
+            $(document).ready(function() {
+                var preHidden = false;
+                function hidePre() {
+                    if(!preHidden) {
+                        preHidden = true;
+                        $(".preloader").fadeOut(350);
+                    }
+                }
+                $(window).on('load', hidePre);
+                setTimeout(hidePre, 700);
             });
         </script>     
     </head>
