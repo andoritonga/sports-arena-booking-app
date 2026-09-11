@@ -94,14 +94,13 @@ If you prefer running the project on a local Apache + MySQL stack:
 
 ---
 
-## 🔐 Default Demo Accounts
+## 🔐 Default Demo Account
 
-| Role | Username / Email | Password |
+| Role | Username | Password |
 | :--- | :--- | :--- |
 | **Administrator** | `admin` | `admin` |
-| **Customer** | `ritongando@gmail.com` | `admin` |
 
-*(You can also register a new customer account directly via `daftar.php`)*
+*(New customers can register an account directly via the website registration page at `daftar.php`)*
 
 ---
 
