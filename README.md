@@ -48,8 +48,8 @@ Get the entire application up and running with a single command:
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/andoritonga/sport-kuy.git
-cd sport-kuy
+git clone https://github.com/andoritonga/sports-arena-booking-app.git
+cd sports-arena-booking-app
 ```
 
 ### 2. Launch with Docker Compose
