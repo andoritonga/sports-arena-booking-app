@@ -88,5 +88,14 @@
   });
 </script>
 
+<?php if(defined('DEMO_MODE') && DEMO_MODE && isset($_GET['alert']) && $_GET['alert'] == 'demo_mode') { ?>
+<script>
+  $(document).ready(function() {
+    var banner = '<div style="padding: 15px 20px 0 20px;"><div class="alert alert-warning alert-dismissible" style="border-radius: 12px; font-weight: 600; margin-bottom: 0; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><i class="fa fa-shield" style="font-size: 16px; margin-right: 6px;"></i><strong>Mode Demo Publik Aktif:</strong> Aksi modifikasi atau penghapusan master data ini dinonaktifkan pada versi GitHub publik untuk menjaga integritas data demo.</div></div>';
+    $('.content-wrapper').prepend(banner);
+  });
+</script>
+<?php } ?>
+
 </body>
 </html>

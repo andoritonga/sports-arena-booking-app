@@ -1,5 +1,11 @@
 <?php 
 include '../koneksi.php';
+
+if (defined('DEMO_MODE') && DEMO_MODE) {
+    header("location:lapangan.php?alert=demo_mode");
+    exit();
+}
+
 $id = $_GET['id'];
 $data = mysqli_query($koneksi, "select * from lapangan where lapangan_id='$id'");
 $d = mysqli_fetch_assoc($data);

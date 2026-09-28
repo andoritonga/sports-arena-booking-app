@@ -104,6 +104,17 @@ If you prefer running the project on a local Apache + MySQL stack:
 
 ---
 
+## 🛡️ Demo Mode (Public Repository Protection)
+
+By default, the application runs with **`DEMO_MODE = true`** to safeguard data integrity for public demonstration and portfolio showcase:
+* **Admin Security**: Protects credentials by blocking password changes for the default administrator account (`admin`).
+* **Master Data Safeguards**: Intercepts destructive actions to prevent deleting courts (*lapangan*), categories, customers, and transaction histories.
+* **Friendly In-App Notices**: Alerts visitors that data modification is disabled in the public demo to preserve availability.
+
+> **💡 Unlocking for Full Production**: To disable demo restrictions for private or production deployment, change `define('DEMO_MODE', false);` in `koneksi.php` or set the environment variable `DEMO_MODE=false`.
+
+---
+
 ## 📁 Directory Structure
 
 ```text

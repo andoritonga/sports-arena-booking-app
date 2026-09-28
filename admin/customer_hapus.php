@@ -1,5 +1,11 @@
 <?php 
 include '../koneksi.php';
+
+if (defined('DEMO_MODE') && DEMO_MODE) {
+    header("location:customer.php?alert=demo_mode");
+    exit();
+}
+
 $id = $_GET['id'];
 
 mysqli_query($koneksi, "delete from customer where customer_id='$id'");

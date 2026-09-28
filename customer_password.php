@@ -31,7 +31,9 @@
 							<?php 
 							if(isset($_GET['alert'])){
 								if($_GET['alert'] == "sukses"){
-									echo "<div class='alert alert-success'>Password anda berhasil diganti!</div>";
+									echo "<div class='alert alert-success' style='border-radius: var(--radius-md); font-weight: 600;'><i class='fa fa-check-circle'></i> Password Anda berhasil diganti!</div>";
+								}elseif($_GET['alert'] == "demo_mode"){
+									echo "<div class='alert alert-warning' style='border-radius: var(--radius-md); font-weight: 600;'><i class='fa fa-shield'></i> <strong>Mode Demo Publik Aktif:</strong> Akun demo utama ini dilindungi dan tidak dapat diubah passwordnya untuk menjaga ketersediaan akses demo portfolio.</div>";
 								}
 							}
 							?>

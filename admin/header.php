@@ -48,6 +48,14 @@
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
 
+            <?php if(defined('DEMO_MODE') && DEMO_MODE) { ?>
+            <li class="hidden-xs" style="padding: 12px 8px;">
+              <span class="badge" style="background: #f59e0b; color: #fff; font-size: 11px; padding: 6px 12px; border-radius: 20px; font-weight: 700; letter-spacing: 0.04em;">
+                <i class="fa fa-shield"></i> DEMO MODE ACTIVE
+              </span>
+            </li>
+            <?php } ?>
+
             <?php
             // Pending confirmations alert badge
             $pending_query = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM invoice WHERE invoice_status='1'");

@@ -1,6 +1,11 @@
 <?php 
 include '../koneksi.php';
 $id  = mysqli_real_escape_string($koneksi, $_POST['id']);
+
+if (defined('DEMO_MODE') && DEMO_MODE && $id == 1) {
+    header("location:admin.php?alert=demo_mode");
+    exit();
+}
 $nama  = mysqli_real_escape_string($koneksi, $_POST['nama']);
 $username = mysqli_real_escape_string($koneksi, $_POST['username']);
 $pwd = $_POST['password'];
