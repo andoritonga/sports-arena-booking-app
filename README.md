@@ -3,22 +3,36 @@
 [![PHP](https://img.shields.io/badge/PHP-7.4+-777bb4?style=for-the-badge&logo=php&logoColor=white)](https://www.php.net/)
 [![MariaDB](https://img.shields.io/badge/MariaDB-10.11-003545?style=for-the-badge&logo=mariadb&logoColor=white)](https://mariadb.org/)
 [![Docker](https://img.shields.io/badge/Docker-Compose-2496ed?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+[![PWA](https://img.shields.io/badge/PWA-Ready-f6820c?style=for-the-badge&logo=pwa&logoColor=white)](manifest.json)
+[![i18n](https://img.shields.io/badge/Language-ID%20%7C%20EN-blue?style=for-the-badge)](lang.php)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
-**SportKuy** is an end-to-end web application for sports center reservations and arena facility management. It provides a sleek, modern booking experience for customers and a full-featured back-office management portal for arena owners and administrators.
+**SportKuy** is an end-to-end web and mobile application for sports center reservations and arena facility management. It provides a sleek, modern, app-like booking experience for customers and a full-featured back-office management portal for arena owners and administrators.
 
 ---
 
 ## ✨ Features
 
 ### 👤 Customer Facing Portal
-* **Modern Venue Showcase**: Browse arenas across various categories (Futsal, Badminton, Basketball, Mini Soccer, etc.) with HD galleries and hourly rates.
+* **Native Mobile App UI & Feel**:
+  * **Bottom Navigation Bar**: Fixed docked tab bar with glassmorphism blur on mobile (*Beranda*, *Kategori*, *Pesanan*, *Akun*).
+  * **Quick Category Carousels**: Swipeable horizontal pill strip for instant 1-tap sport filtering (Futsal, Badminton, Basketball, Mini Soccer, Tennis, Volley).
+  * **Interactive Bottom Sheet Drawer**: Slide-up category explore modal with modern grid icons.
+  * **Modern CSS Preloader**: Smooth circular glowing spinner replacing legacy loading images.
+* **Progressive Web App (PWA) & Offline Mode**:
+  * **Installable Standalone App**: Installable to Android, iOS, and Desktop homescreen with native app window experience (no browser address bar).
+  * **Floating Install Prompt**: Smart in-app prompt banner with 1-click install action.
+  * **Offline Fallback Engine**: Service Worker caching strategy with a dedicated, interactive bilingual offline page (`offline.html`).
+  * **Complete Icon Suite**: Full set of high-res maskable and standard app icons (`72px` up to `512px` + Apple Touch Icon).
+* **Bilingual Multi-Language Support (ID 🇮🇩 / EN 🇬🇧)**:
+  * Seamless 1-tap language toggle pill (`[ 🇮🇩 ID | 🇬🇧 EN ]`) on top headers, bottom drawers, and offline pages.
+  * Persistent language preferences remembered via cookies and sessions.
+* **Modern Venue Showcase**: Browse arenas across various categories with HD galleries, amenities specs, and hourly rates.
 * **Interactive Field Schedule & Schedulers**: Check real-time court availability, active bookings, and select match duration.
 * **Unified Dual-Role Authentication**: Seamless login gateway automatically directing customers to their dashboard and administrators to the management portal.
 * **Online Booking & Checkout**: Streamlined reservation flow with invoice generation and payment instructions.
 * **Payment Receipt Upload**: Upload transfer proofs (`.jpg`, `.png`, `.jpeg`) directly from the customer order panel.
 * **Printable Executive Invoices**: High-contrast, pixel-perfect printable invoice statements (`@media print` supported).
-* **Progressive Web App (PWA) Ready**: Offline-capable service worker and installable app manifest.
 
 ### 🛡️ Admin Management Portal
 * **Executive Dashboard**: Real-time business metrics including confirmed revenue, active reservations, arena count, and recent transactions.
@@ -35,7 +49,9 @@
 
 * **Backend**: PHP 7.4+
 * **Database**: MariaDB 10.11 / MySQL 8.0
-* **Frontend**: HTML5, Modern CSS3 (`admin-modern.css`, `modern-custom.css`), JavaScript, Bootstrap 3
+* **Frontend**: HTML5, Modern CSS3 (`admin-modern.css`, `modern-custom.css`, `pwa-app.css`), JavaScript (`pwa-app.js`), Bootstrap 3
+* **PWA & Engine**: Service Worker API, Cache API, Web App Manifest
+* **Internationalization**: Custom PHP bilingual localization engine (`lang.php`)
 * **Typography & Icons**: Google Fonts (*Outfit*, *Plus Jakarta Sans*), Font Awesome 4.7, Ionicons
 * **Containerization**: Docker, Docker Compose
 * **Orchestration**: Kubernetes manifests (`kubernetes.yaml`) included
@@ -62,9 +78,10 @@ Docker Compose will automatically:
 2. Automatically import the initial schema and demo data from `project_sport_center.sql`.
 3. Build and run the Apache PHP 7.4 container (`sportkuy-app`) on port `8080`.
 
-### 3. Open in Browser
+### 3. Open in Browser / Install PWA
 * **Customer Website & Login**: [http://localhost:8080](http://localhost:8080)
 * **Admin Portal**: [http://localhost:8080/admin/](http://localhost:8080/admin/)
+* **Install PWA**: Click the **"Pasang" / "Install"** prompt button at the bottom of the screen or use the browser address bar install icon.
 
 ---
 
@@ -122,8 +139,13 @@ sport-kuy/
 │   ├── css/
 │   │   ├── admin-modern.css    # Modernized stylesheet for Admin Portal
 │   │   ├── modern-custom.css   # Modernized stylesheet for Customer Portal
+│   │   ├── pwa-app.css         # PWA app shell, bottom nav & bilingual toggle styles
 │   │   └── style.css           # Base theme stylesheet
-│   └── img/                    # Hero banners & illustrations
+│   ├── img/
+│   │   ├── icons/              # Full suite of PWA icons (72px to 512px, maskable, apple)
+│   │   └── logo.png            # Master app logo icon
+│   └── js/
+│       └── pwa-app.js          # PWA engine, install prompts, & native interactions
 ├── gambar/                     # Dynamic uploaded assets
 │   ├── bukti/                  # Customer payment transfer receipts
 │   ├── lapangan/               # Arena facility photographs
@@ -132,6 +154,10 @@ sport-kuy/
 ├── docker-compose.yml          # Multi-container orchestration config
 ├── kubernetes.yaml             # Kubernetes deployment & service spec
 ├── koneksi.php                 # Database connection handler
+├── lang.php                    # Bilingual localization engine (ID / EN)
+├── manifest.json               # PWA Web App Manifest
+├── sw.js                       # Service Worker for offline caching & runtime
+├── offline.html                # Offline fallback page
 ├── masuk.php                   # Unified authentication page
 ├── index.php                   # Public landing & venue showcase
 ├── project_sport_center.sql    # MariaDB database dump
