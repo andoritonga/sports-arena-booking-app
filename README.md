@@ -1,33 +1,52 @@
 # 🏆 SportKuy - Modern Sports Arena Booking & Management System
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-sportkuy.ritonga.xyz-059669?style=for-the-badge&logo=google-chrome&logoColor=white)](https://sportkuy.ritonga.xyz)
+[![PWA Ready](https://img.shields.io/badge/PWA-Installable-8b5cf6?style=for-the-badge&logo=pwa&logoColor=white)](https://sportkuy.ritonga.xyz)
+[![Bilingual](https://img.shields.io/badge/Language-ID%20%7C%20EN-3b82f6?style=for-the-badge)](https://sportkuy.ritonga.xyz)
 [![PHP](https://img.shields.io/badge/PHP-7.4+-777bb4?style=for-the-badge&logo=php&logoColor=white)](https://www.php.net/)
 [![MariaDB](https://img.shields.io/badge/MariaDB-10.11-003545?style=for-the-badge&logo=mariadb&logoColor=white)](https://mariadb.org/)
 [![Docker](https://img.shields.io/badge/Docker-Compose-2496ed?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
-**SportKuy** is an end-to-end web application for sports center reservations and arena facility management. It provides a sleek, modern booking experience for customers and a full-featured back-office management portal for arena owners and administrators.
+> ### 🌐 **Live Demo Online**: [https://sportkuy.ritonga.xyz](https://sportkuy.ritonga.xyz)  
+> Experience SportKuy live in your browser, or install it directly to your smartphone's home screen as a Progressive Web App (PWA)!
 
 ---
 
-## ✨ Features
+## 📌 About SportKuy (Public Demo Edition)
 
-### 👤 Customer Facing Portal
-* **Modern Venue Showcase**: Browse arenas across various categories (Futsal, Badminton, Basketball, Mini Soccer, etc.) with HD galleries and hourly rates.
-* **Interactive Field Schedule & Schedulers**: Check real-time court availability, active bookings, and select match duration.
-* **Unified Dual-Role Authentication**: Seamless login gateway automatically directing customers to their dashboard and administrators to the management portal.
-* **Online Booking & Checkout**: Streamlined reservation flow with invoice generation and payment instructions.
-* **Payment Receipt Upload**: Upload transfer proofs (`.jpg`, `.png`, `.jpeg`) directly from the customer order panel.
-* **Printable Executive Invoices**: High-contrast, pixel-perfect printable invoice statements (`@media print` supported).
-* **Progressive Web App (PWA) Ready**: Offline-capable service worker and installable app manifest.
+**SportKuy** is an end-to-end web platform and Progressive Web App for sports center court reservations, schedule tracking, and arena facility management. It features a modern, mobile-optimized customer booking interface alongside a back-office administration portal for venue operators.
+
+> **ℹ️ Public Demo Edition Notice:**  
+> This repository contains the **Public Demo Edition** of SportKuy. It is pre-configured with built-in data integrity safeguards to allow visitors, developers, and potential clients to safely test and evaluate all core reservation flows without corrupting shared demonstration data.
+
+---
+
+## ✨ Features & Highlights
+
+### 📱 Modern Mobile App Shell & PWA (Progressive Web App)
+* **Installable Native Experience**: Add SportKuy to your Android, iOS, or desktop home screen with a standalone app shell.
+* **Service Worker Caching**: Fast loading, offline fallback page, and smooth navigation.
+* **Mobile App Navigation**: Floating bottom tab bar (Home, Courts, Categories, Orders/Account) optimized for one-thumb mobile browsing.
+* **Category Drawer**: Interactive bottom sheet drawer for filtering venues across sports categories.
+
+### 🌐 Bilingual Support (Indonesian & English)
+* **One-Click Language Switcher**: Switch effortlessly between Bahasa Indonesia (`ID`) and English (`EN`).
+* **Persistent Preference**: Language choice is automatically remembered across sessions and devices.
+
+### 👤 Customer Booking Portal
+* **Venue Directory**: Browse sports fields across categories (Futsal, Badminton, Basketball, Mini Soccer, etc.) with HD galleries, hourly rates, and facility tags.
+* **Real-time Court Availability**: Interactive court schedulers prevent double-bookings and display busy slots.
+* **Online Booking & Invoice Generation**: Instant reservation calculation, booking codes, and printable invoices (`@media print` supported).
+* **Payment Proof Upload**: Submit transfer payment receipts (`.jpg`, `.png`, `.jpeg`) directly from the customer dashboard.
+* **Customer Dashboard**: Track active reservations, confirmation statuses, and past booking history.
 
 ### 🛡️ Admin Management Portal
-* **Executive Dashboard**: Real-time business metrics including confirmed revenue, active reservations, arena count, and recent transactions.
-* **Booking & Transaction Workflow**: Instant payment receipt verification modal, one-click status transitions (*Menunggu Bayar*, *Menunggu Konfirmasi*, *Dikonfirmasi*, *Selesai*, *Ditolak*).
-* **Arena & Facility Management**: Create, edit, and manage fields with multi-photo gallery uploads and hourly rate configuration.
-* **Category Directory**: Organize sports centers and facility types with registered venue counters.
-* **Customer Directory**: Manage customer databases, contact info, and booking histories.
-* **Financial & Sales Reports**: Filter sales performance by preset intervals (*Hari Ini*, *Bulan Ini*, *30 Hari Terakhir*, *Tahun Ini*), export formal PDF statements, and print formatted revenue recaps.
-* **Administrator Security**: Role-based access control and admin profile/password settings.
+* **Executive Dashboard**: Real-time revenue overview, total court facilities, registered customers, and incoming transaction feeds.
+* **Transaction Workflow**: Review uploaded payment proofs in an interactive modal, verify payments, and update booking status (*Menunggu Bayar*, *Menunggu Konfirmasi*, *Dikonfirmasi*, *Selesai*, *Ditolak*).
+* **Arena & Facility Management**: Create and manage court listings, photo galleries, and hourly pricing.
+* **Sales & Financial Reports**: Filter revenue by custom date ranges, export formatted PDF statements, and print official financial summaries.
+* **Category & Customer Directories**: Overview of registered venue categories and customer records.
 
 ---
 
@@ -35,8 +54,9 @@
 
 * **Backend**: PHP 7.4+
 * **Database**: MariaDB 10.11 / MySQL 8.0
-* **Frontend**: HTML5, Modern CSS3 (`admin-modern.css`, `modern-custom.css`), JavaScript, Bootstrap 3
-* **Typography & Icons**: Google Fonts (*Outfit*, *Plus Jakarta Sans*), Font Awesome 4.7, Ionicons
+* **Frontend**: HTML5, Modern CSS3 (`pwa-app.css`, `modern-custom.css`, `admin-modern.css`), JavaScript, Bootstrap 3
+* **PWA Engine**: Service Worker (v1.1.0), Web App Manifest, App Icons (72px to 512px)
+* **Typography & Icons**: Plus Jakarta Sans, Outfit, Font Awesome 4.7, Ionicons
 * **Containerization**: Docker, Docker Compose
 * **Orchestration**: Kubernetes manifests (`kubernetes.yaml`) included
 
@@ -44,7 +64,7 @@
 
 ## 🚀 Quick Start with Docker (Recommended)
 
-Get the entire application up and running with a single command:
+Get the entire application up and running locally with a single command:
 
 ### 1. Clone the Repository
 ```bash
@@ -58,9 +78,9 @@ docker compose up -d
 ```
 
 Docker Compose will automatically:
-1. Spin up a MariaDB 10.11 container (`sportkuy-db`) on port `3307`.
+1. Spin up a MariaDB 10.11 database container (`sportkuy-db`) on port `3307`.
 2. Automatically import the initial schema and demo data from `project_sport_center.sql`.
-3. Build and run the Apache PHP 7.4 container (`sportkuy-app`) on port `8080`.
+3. Build and launch the Apache PHP 7.4 application container (`sportkuy-app`) on port `8080`.
 
 ### 3. Open in Browser
 * **Customer Website & Login**: [http://localhost:8080](http://localhost:8080)
@@ -70,18 +90,18 @@ Docker Compose will automatically:
 
 ## 💻 Manual Installation (Local Server / XAMPP / Laragon)
 
-If you prefer running the project on a local Apache + MySQL stack:
+If you prefer running on a local Apache + MySQL environment:
 
-1. **Clone or Copy Source Code**:
-   Place the project directory inside your web server document root (e.g. `htdocs/sport-kuy` or `www/sport-kuy`).
+1. **Clone or Copy Source Code**:  
+   Place the project folder inside your web server document root (e.g. `htdocs/sport-kuy` or `www/sport-kuy`).
 
-2. **Create Database & Import Schema**:
+2. **Create Database & Import Schema**:  
    * Open phpMyAdmin or your MySQL client.
-   * Create a new database named `project_sport_center`.
-   * Import the file `project_sport_center.sql` into the database.
+   * Create a database named `project_sport_center`.
+   * Import `project_sport_center.sql` into the database.
 
-3. **Configure Database Connection**:
-   Edit `koneksi.php` or provide environment variables if needed:
+3. **Configure Database Connection**:  
+   Adjust credentials in `koneksi.php` or provide environment variables if needed:
    ```php
    $db_host = getenv('DB_HOST') ?: 'localhost';
    $db_user = getenv('DB_USER') ?: 'root';
@@ -89,37 +109,36 @@ If you prefer running the project on a local Apache + MySQL stack:
    $db_name = getenv('DB_NAME') ?: 'project_sport_center';
    ```
 
-4. **Access the Application**:
+4. **Access the Application**:  
    Navigate to `http://localhost/sport-kuy/` in your browser.
 
 ---
 
-## 🔐 Default Demo Account
+## 🔐 Default Demo Accounts
 
-| Role | Username | Password |
-| :--- | :--- | :--- |
-| **Administrator** | `admin` | `admin` |
+| Role | Username / Email | Password | Access Portal |
+| :--- | :--- | :--- | :--- |
+| **Administrator** | `admin` | `admin` | [http://localhost:8080/admin/](http://localhost:8080/admin/) |
+| **Demo Customer** | `ritongando@gmail.com` | `12345678` | [http://localhost:8080/masuk.php](http://localhost:8080/masuk.php) |
 
-*(New customers can register an account directly via the website registration page at `daftar.php`)*
+*(Visitors can also register a brand new customer account directly via `daftar.php`)*
 
 ---
 
-## 🛡️ Demo Mode (Public Repository Protection)
+## 🛡️ Public Demo Safeguards
 
-By default, the application runs with **`DEMO_MODE = true`** to safeguard data integrity for public demonstration and portfolio showcase:
-* **Admin Security**: Protects credentials by blocking password changes for the default administrator account (`admin`).
-* **Master Data Safeguards**: Intercepts destructive actions to prevent deleting courts (*lapangan*), categories, customers, and transaction histories.
-* **Friendly In-App Notices**: Alerts visitors that data modification is disabled in the public demo to preserve availability.
-
-> **💡 Unlocking for Full Production**: To disable demo restrictions for private or production deployment, change `define('DEMO_MODE', false);` in `koneksi.php` or set the environment variable `DEMO_MODE=false`.
+This Public Demo Edition includes active protection to preserve system availability and showcase integrity:
+* **Account Safety**: Default administrative and demo customer credentials cannot be overwritten or locked out.
+* **Master Data Protection**: Deletion of demonstration court facilities, sports categories, and foundational records is prevented.
+* **Safe Sandbox**: Users are free to browse all menus, make test reservations, test the PWA features, and preview administrative workflows without risk of breaking the demo environment.
 
 ---
 
 ## 📁 Directory Structure
 
 ```text
-sport-kuy/
-├── admin/                      # Admin dashboard & management portal
+sports-arena-booking-app/
+├── admin/                      # Back-office admin portal & dashboard
 │   ├── index.php               # Admin overview & stat metrics
 │   ├── transaksi.php           # Booking & payment verification
 │   ├── lapangan.php            # Arena facility management
@@ -129,21 +148,29 @@ sport-kuy/
 │   ├── laporan_print.php       # Printable financial statement
 │   └── laporan_pdf.php         # PDF statement generator
 ├── assets/                     # Core vendor libraries & AdminLTE plugins
-├── frontend/                   # Modern stylesheets, fonts & static images
+├── frontend/                   # Modern stylesheets, scripts & static assets
 │   ├── css/
-│   │   ├── admin-modern.css    # Modernized stylesheet for Admin Portal
-│   │   ├── modern-custom.css   # Modernized stylesheet for Customer Portal
-│   │   └── style.css           # Base theme stylesheet
-│   └── img/                    # Hero banners & illustrations
-├── gambar/                     # Dynamic uploaded assets
+│   │   ├── pwa-app.css         # Modern Mobile PWA & App Shell stylesheet
+│   │   ├── modern-custom.css   # Modern Customer Portal styling
+│   │   └── admin-modern.css    # Modernized Admin Portal styling
+│   ├── js/
+│   │   └── pwa-app.js          # PWA Service Worker registrar & UI interactions
+│   └── img/
+│       ├── icons/              # PWA application icons (72px to 512px)
+│       └── logo.png            # SportKuy brand logo
+├── gambar/                     # Dynamic uploaded media
 │   ├── bukti/                  # Customer payment transfer receipts
 │   ├── lapangan/               # Arena facility photographs
 │   └── user/                   # User profile avatars
-├── Dockerfile                  # PHP 7.4 Apache image definition
+├── lang.php                    # Bilingual translation engine (ID / EN)
+├── manifest.json               # Progressive Web App manifest
+├── sw.js                       # PWA Service Worker caching engine
+├── offline.html                # Offline fallback experience
+├── Dockerfile                  # PHP 7.4 Apache container specification
 ├── docker-compose.yml          # Multi-container orchestration config
 ├── kubernetes.yaml             # Kubernetes deployment & service spec
-├── koneksi.php                 # Database connection handler
-├── masuk.php                   # Unified authentication page
+├── koneksi.php                 # Database connection handler & demo safeguards
+├── masuk.php                   # Unified login gateway
 ├── index.php                   # Public landing & venue showcase
 ├── project_sport_center.sql    # MariaDB database dump
 └── README.md                   # Project documentation

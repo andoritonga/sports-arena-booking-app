@@ -1,16 +1,88 @@
 {
-    "name": "Aplikasi Booking Lapangan",
-    "short_name": "PWA Field Book",
-    "description": "Aplikasi Booking Lapangan",
-    "start_url": "index.php",
-    "display": "standalone",
-    "background_color": "#404040",
-    "theme_color": "#ff0000",
-    "icons": [
-        {
-            "src": "frontend/img/logo.png",
-            "sizes": "512x512",
-            "type": "image/png"
-        }
-    ]
+  "id": "/?source=pwa",
+  "name": "SportKuy - Booking Lapangan Olahraga",
+  "short_name": "SportKuy",
+  "description": "Aplikasi Reservasi & Booking Lapangan Olahraga Online Cepat, Nyaman, dan Terpercaya",
+  "start_url": "index.php",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "window-controls-overlay"],
+  "orientation": "portrait-primary",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "lang": "id-ID",
+  "categories": ["sports", "lifestyle", "utilities"],
+  "icons": [
+    {
+      "src": "frontend/img/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "frontend/img/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "frontend/img/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "frontend/img/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "frontend/img/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "frontend/img/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "frontend/img/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "frontend/img/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "frontend/img/icons/icon-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Beranda",
+      "short_name": "Beranda",
+      "description": "Cari dan sewa lapangan olahraga",
+      "url": "index.php",
+      "icons": [{ "src": "frontend/img/icons/icon-96x96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Pesanan Saya",
+      "short_name": "Pesanan",
+      "description": "Lihat status riwayat booking dan pembayaran",
+      "url": "customer_pesanan.php",
+      "icons": [{ "src": "frontend/img/icons/icon-96x96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Profil Akun",
+      "short_name": "Akun",
+      "description": "Pengaturan akun dan profil customer",
+      "url": "customer.php",
+      "icons": [{ "src": "frontend/img/icons/icon-96x96.png", "sizes": "96x96" }]
+    }
+  ]
 }

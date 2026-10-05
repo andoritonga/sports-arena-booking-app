@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#0f172a">
+    <title>Offline - SportKuy</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="frontend/img/icons/icon-192x192.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="frontend/css/font-awesome.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            text-align: center;
+        }
+        .offline-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 36px 28px;
+            max-width: 420px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        .offline-icon-wrap {
+            width: 96px;
+            height: 96px;
+            background: rgba(239, 68, 68, 0.12);
+            border: 2px solid rgba(239, 68, 68, 0.3);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            animation: pulse-ring 2s infinite ease-in-out;
+        }
+        .offline-icon-wrap i {
+            font-size: 40px;
+            color: #f87171;
+        }
+        @keyframes pulse-ring {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 0 0 12px rgba(239, 68, 68, 0); }
+        }
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 26px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+        p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #94a3b8;
+            margin-bottom: 28px;
+        }
+        .retry-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 14px 24px;
+            background: linear-gradient(135deg, #2563eb, #0284c7);
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 700;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+            transition: all 0.2s ease;
+        }
+        .retry-btn:active {
+            transform: scale(0.97);
+        }
+        .badge-app {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 24px;
+            font-size: 13px;
+            color: #64748b;
+        }
+        .badge-app span {
+            color: #38bdf8;
+            font-weight: 700;
+        }
+        .lang-switch-toggle {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 9999px;
+            padding: 3px;
+            gap: 2px;
+            margin-bottom: 20px;
+        }
+        .lang-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 5px 12px;
+            border-radius: 9999px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #94a3b8;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .lang-btn.active {
+            background: linear-gradient(135deg, #2563eb, #0284c7);
+            color: #ffffff;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-card">
+        <div class="lang-switch-toggle">
+            <button class="lang-btn active" id="btn-lang-id" onclick="setOfflineLang('id')"><span class="flag">🇮🇩</span> ID</button>
+            <button class="lang-btn" id="btn-lang-en" onclick="setOfflineLang('en')"><span class="flag">🇬🇧</span> EN</button>
+        </div>
+
+        <div class="offline-icon-wrap">
+            <i class="fa fa-wifi"></i>
+        </div>
+        <h1 id="offline-title">Anda Sedang Offline</h1>
+        <p id="offline-desc">Koneksi internet Anda terputus. Pastikan data seluler atau Wi-Fi Anda aktif untuk melanjutkan booking lapangan di SportKuy.</p>
+        
+        <button class="retry-btn" onclick="window.location.reload();">
+            <i class="fa fa-refresh"></i> <span id="offline-btn">Coba Muat Ulang</span>
+        </button>
+
+        <div class="badge-app">
+            <i class="fa fa-soccer-ball-o" style="color: #38bdf8;"></i>
+            <span>SportKuy PWA</span> • <span id="offline-mode">Mode Mandiri</span>
+        </div>
+    </div>
+
+    <script>
+        const dict = {
+            id: {
+                title: "Anda Sedang Offline",
+                desc: "Koneksi internet Anda terputus. Pastikan data seluler atau Wi-Fi Anda aktif untuk melanjutkan booking lapangan di SportKuy.",
+                btn: "Coba Muat Ulang",
+                mode: "Mode Mandiri"
+            },
+            en: {
+                title: "You Are Offline",
+                desc: "Your internet connection was lost. Please check your mobile data or Wi-Fi to continue booking on SportKuy.",
+                btn: "Try Again",
+                mode: "Standalone Mode"
+            }
+        };
+
+        function setOfflineLang(l) {
+            document.cookie = "sportkuy_lang=" + l + "; path=/; max-age=31536000";
+            document.getElementById('offline-title').textContent = dict[l].title;
+            document.getElementById('offline-desc').textContent = dict[l].desc;
+            document.getElementById('offline-btn').textContent = dict[l].btn;
+            document.getElementById('offline-mode').textContent = dict[l].mode;
+            document.getElementById('btn-lang-id').classList.toggle('active', l === 'id');
+            document.getElementById('btn-lang-en').classList.toggle('active', l === 'en');
+        }
+
+        // Auto-detect lang from cookie
+        const match = document.cookie.match(/sportkuy_lang=([a-z]+)/);
+        if (match && match[1] === 'en') {
+            setOfflineLang('en');
+        }
+    </script>
+</body>
+</html>

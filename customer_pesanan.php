@@ -1,7 +1,7 @@
 <?php include 'header.php'; ?>
 
-<!-- BREADCRUMB -->
-<div id="breadcrumb">
+<!-- BREADCRUMB (Hidden on mobile) -->
+<div id="breadcrumb" class="hidden-xs">
 	<div class="container">
 		<ul class="breadcrumb">
 			<li><a href="index.php">Home</a></li>
@@ -21,7 +21,7 @@
 
 			<div id="main" class="col-md-9">
 				
-				<h4>PESANAN</h4>
+				<h4><?php echo __t('my_bookings'); ?></h4>
 
 				<div id="store">
 					<div class="row">
@@ -32,7 +32,7 @@
 							if(isset($_GET['alert'])){
 								if($_GET['alert'] == "gagal"){
 									echo "<div class='alert alert-danger'>Gambar gagal diupload!</div>";
-								}elseif($_GET['alert'] == "sukses" || $_GET['alert'] == "sukses_booking"){
+								}elseif($_GET['alert'] == "sukses"){
 									echo "<div class='alert alert-success'>Pesanan berhasil dibuat, silahkan melakukan pembayaran!</div>";
 								}elseif($_GET['alert'] == "upload"){
 									echo "<div class='alert alert-success'>Konfirmasi pembayaran berhasil tersimpan, silahkan menunggu konfirmasi dari admin!</div>";
@@ -53,13 +53,13 @@
 									<thead>
 										<tr>
 											<th>NO</th>
-											<th>No.Invoice</th>
-											<th>Tanggal Booking</th>
-											<th>Tanggal Main</th>
-											<th>Nama Customer</th>
-											<th>Total Bayar</th>
-											<th class="text-center">Status</th>
-											<th class="text-center">OPSI</th>
+											<th><?php echo __t('invoice_no'); ?></th>
+											<th><?php echo __t('booking_date'); ?></th>
+											<th><?php echo __t('play_date'); ?></th>
+											<th><?php echo __t('customer_name'); ?></th>
+											<th><?php echo __t('total_amount'); ?></th>
+											<th class="text-center"><?php echo __t('payment_status'); ?></th>
+											<th class="text-center"><?php echo __t('action'); ?></th>
 										</tr>
 									</thead>
 									<tbody>

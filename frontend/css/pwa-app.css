@@ -1,0 +1,663 @@
+/* ==========================================================================
+   SPORTKUY PWA & NATIVE APP EXPERIENCE SYSTEM
+   Transforming web UI into a sleek, high-performance mobile application
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. APP SHELL & GLOBAL APP RESETS
+   -------------------------------------------------------------------------- */
+:root {
+  --app-safe-top: env(safe-area-inset-top, 0px);
+  --app-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --app-bottom-nav-height: 64px;
+  --app-primary: #2563eb;
+  --app-primary-hover: #1d4ed8;
+  --app-accent: #06b6d4;
+  --app-dark: #0f172a;
+  --app-card-bg: #ffffff;
+  --app-text: #1e293b;
+  --app-muted: #64748b;
+  --app-border: #e2e8f0;
+}
+
+html, body {
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none;
+  overscroll-behavior-y: contain;
+}
+
+/* App touch interaction responsiveness */
+button, .btn, .btn-modern, .app-nav-item, .category-pill, .product {
+  touch-action: manipulation;
+  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:active, .btn:active, .btn-modern:active, .category-pill:active {
+  transform: scale(0.96) !important;
+}
+
+/* Ensure content is never blocked by bottom app bar */
+@media (max-width: 991px) {
+  body {
+    padding-bottom: calc(var(--app-bottom-nav-height) + var(--app-safe-bottom) + 20px) !important;
+  }
+}
+
+/* Standalone PWA adjustments (Installed App Mode) */
+@media all and (display-mode: standalone) {
+  body {
+    user-select: none;
+    -webkit-user-select: none;
+    padding-top: calc(var(--app-safe-top));
+  }
+  
+  /* Hide typical web-only banners or external links */
+  .footer-social, #breadcrumb {
+    display: none !important;
+  }
+  
+  #header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. APP HEADER BAR (Mobile First)
+   -------------------------------------------------------------------------- */
+@media (max-width: 991px) {
+  #header {
+    position: sticky;
+    top: 0;
+    z-index: 990;
+    padding: 10px 0 !important;
+    background: rgba(15, 23, 42, 0.94) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2) !important;
+  }
+
+  .header-logo .logo-text {
+    font-size: 20px !important;
+    line-height: 34px !important;
+  }
+
+  .header-logo .logo-text .badge-icon {
+    width: 34px !important;
+    height: 34px !important;
+    font-size: 16px !important;
+  }
+
+  /* Hide old desktop menu & hamburger on mobile since we have bottom nav */
+  .nav-toggle, #navigation {
+    display: none !important;
+  }
+
+  .header-btns {
+    gap: 8px !important;
+  }
+
+  .header-btns .btn-modern {
+    padding: 7px 14px !important;
+    font-size: 12px !important;
+    border-radius: 9999px !important;
+  }
+}
+
+/* App Status Badge */
+.app-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #34d399;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  margin-left: 8px;
+}
+
+.app-status-dot {
+  width: 6px;
+  height: 6px;
+  background: #10b981;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #10b981;
+}
+
+/* --------------------------------------------------------------------------
+   3. BOTTOM APP NAVIGATION BAR (Mobile Native Tab Bar)
+   -------------------------------------------------------------------------- */
+.app-bottom-nav {
+  display: none;
+}
+
+@media (max-width: 991px) {
+  .app-bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: calc(var(--app-bottom-nav-height) + var(--app-safe-bottom));
+    padding-bottom: var(--app-safe-bottom);
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.3);
+    z-index: 10000;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .app-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    height: 100%;
+    color: #94a3b8;
+    text-decoration: none !important;
+    position: relative;
+    padding: 6px 0;
+    transition: color 0.2s ease;
+  }
+
+  .app-nav-item i {
+    font-size: 20px;
+    margin-bottom: 4px;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .app-nav-item span {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+
+  .app-nav-item.active {
+    color: #38bdf8;
+  }
+
+  .app-nav-item.active i {
+    transform: translateY(-2px);
+    color: #38bdf8;
+    text-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+  }
+
+  .app-nav-item.active::after {
+    content: '';
+    position: absolute;
+    top: 4px;
+    width: 20px;
+    height: 3px;
+    background: linear-gradient(90deg, #2563eb, #38bdf8);
+    border-radius: 9999px;
+  }
+
+  /* Badge indicator on Nav item */
+  .app-nav-badge {
+    position: absolute;
+    top: 6px;
+    right: calc(50% - 18px);
+    background: #ef4444;
+    color: #ffffff;
+    font-size: 9px;
+    font-weight: 800;
+    min-width: 16px;
+    height: 16px;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    box-shadow: 0 2px 6px rgba(239, 68, 68, 0.5);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. APP HORIZONTAL CATEGORY PILLS (Native App Feed Carousel)
+   -------------------------------------------------------------------------- */
+.app-categories-strip {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  padding: 12px 15px;
+  margin: 0 -15px 16px -15px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.app-categories-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.category-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 9999px;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  text-decoration: none !important;
+}
+
+.category-pill i {
+  color: var(--app-primary);
+  font-size: 14px;
+}
+
+.category-pill.active, .category-pill:hover {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #ffffff !important;
+  border-color: #2563eb;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+}
+
+.category-pill.active i, .category-pill:hover i {
+  color: #ffffff !important;
+}
+
+/* --------------------------------------------------------------------------
+   5. APP BOTTOM SHEET (Categories Modal / Offcanvas)
+   -------------------------------------------------------------------------- */
+.app-bottom-sheet-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 10001;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.app-bottom-sheet-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.app-bottom-sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #ffffff;
+  border-top-left-radius: 28px;
+  border-top-right-radius: 28px;
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.25);
+  z-index: 10002;
+  padding: 16px 20px calc(24px + var(--app-safe-bottom)) 20px;
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.app-bottom-sheet-overlay.show .app-bottom-sheet {
+  transform: translateY(0);
+}
+
+.sheet-handle {
+  width: 44px;
+  height: 5px;
+  background: #cbd5e1;
+  border-radius: 9999px;
+  margin: 0 auto 16px auto;
+}
+
+.sheet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.sheet-header h3 {
+  font-family: 'Outfit', sans-serif !important;
+  font-size: 19px !important;
+  font-weight: 800 !important;
+  color: #0f172a !important;
+  margin: 0 !important;
+}
+
+.sheet-close-btn {
+  background: #f1f5f9;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: #64748b;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Category Grid Inside Bottom Sheet */
+.sheet-category-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+@media (max-width: 480px) {
+  .sheet-category-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.sheet-category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  text-decoration: none !important;
+  padding: 12px 6px;
+  border-radius: 16px;
+  background: #f8fafc;
+  border: 1px solid #f1f5f9;
+  transition: all 0.2s ease;
+}
+
+.sheet-category-item:active {
+  transform: scale(0.95);
+  background: #eff6ff;
+}
+
+.sheet-category-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #2563eb, #0284c7);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-bottom: 8px;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.sheet-category-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1.3;
+}
+
+/* --------------------------------------------------------------------------
+   6. PWA INSTALL BANNER / PROMPT
+   -------------------------------------------------------------------------- */
+.pwa-install-prompt {
+  position: fixed;
+  bottom: calc(var(--app-bottom-nav-height) + var(--app-safe-bottom) + 16px);
+  left: 16px;
+  right: 16px;
+  max-width: 460px;
+  margin: 0 auto;
+  background: #0f172a;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  padding: 14px 16px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+  z-index: 9999;
+  display: none;
+  animation: slide-up-prompt 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slide-up-prompt {
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.pwa-prompt-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pwa-prompt-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+}
+
+.pwa-prompt-text {
+  flex: 1;
+}
+
+.pwa-prompt-title {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 800;
+  font-family: 'Outfit', sans-serif;
+  margin-bottom: 2px;
+}
+
+.pwa-prompt-desc {
+  color: #94a3b8;
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+.pwa-prompt-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-pwa-install {
+  background: linear-gradient(135deg, #2563eb, #0284c7);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 12px;
+  padding: 8px 14px;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.btn-pwa-dismiss {
+  background: transparent;
+  color: #64748b;
+  border: none;
+  font-size: 16px;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Header Install Button (Pill) */
+.btn-header-install {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #ffffff !important;
+  font-weight: 700;
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  border: none;
+  text-decoration: none !important;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  cursor: pointer;
+}
+
+/* --------------------------------------------------------------------------
+   7. OFFLINE / ONLINE TOAST NOTIFICATION
+   -------------------------------------------------------------------------- */
+.app-connection-toast {
+  position: fixed;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100px);
+  background: #1e293b;
+  color: #ffffff;
+  padding: 10px 18px;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 10005;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.app-connection-toast.show {
+  transform: translateX(-50%) translateY(0);
+}
+
+.app-connection-toast.offline {
+  background: #dc2626;
+  border: 1px solid #ef4444;
+}
+
+.app-connection-toast.online {
+  background: #059669;
+  border: 1px solid #10b981;
+}
+
+/* --------------------------------------------------------------------------
+   8. MODERN APP CARD & LIST POLISH
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  /* Cleaner mobile venue cards */
+  .product-single {
+    border-radius: 18px !important;
+    overflow: hidden !important;
+    margin-bottom: 18px !important;
+  }
+  
+  .product-thumb {
+    height: 180px !important;
+  }
+
+  .product-thumb img {
+    height: 180px !important;
+    object-fit: cover !important;
+  }
+
+  /* Make hero banner compact on phone like an app header */
+  .modern-hero-section {
+    padding: 24px 16px !important;
+    border-radius: 20px !important;
+    margin: 8px 0 16px 0 !important;
+  }
+
+  .modern-hero-section .hero-title {
+    font-size: 22px !important;
+    line-height: 1.3 !important;
+  }
+
+  .modern-hero-section .hero-subtitle {
+    font-size: 13px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .hero-search-box {
+    border-radius: 14px !important;
+    padding: 6px 8px !important;
+  }
+
+  .hero-search-box input {
+    height: 42px !important;
+    font-size: 13px !important;
+  }
+
+  .hero-search-btn {
+    padding: 8px 16px !important;
+    font-size: 13px !important;
+    border-radius: 10px !important;
+  }
+
+  /* Compact Footer for mobile/app */
+  #footer {
+    padding: 30px 0 calc(20px + var(--app-safe-bottom)) 0 !important;
+  }
+
+  #footer .footer {
+    margin-bottom: 20px !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   9. LANGUAGE SWITCH TOGGLE
+   -------------------------------------------------------------------------- */
+.lang-switch-toggle {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(30, 41, 59, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 9px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #94a3b8 !important;
+  text-decoration: none !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  line-height: 1;
+}
+
+.lang-btn:hover {
+  color: #ffffff !important;
+}
+
+.lang-btn.active {
+  background: linear-gradient(135deg, #2563eb, #0284c7);
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
+}
+
+.lang-btn .flag {
+  font-size: 13px;
+  line-height: 1;
+}
+
+@media (max-width: 480px) {
+  .lang-btn {
+    padding: 4px 6px;
+    font-size: 10px;
+  }
+}

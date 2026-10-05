@@ -12,11 +12,10 @@ if (!$koneksi) {
 }
 
 // =========================================================================
-// DEMO MODE CONFIGURATION (PUBLIC GITHUB PROTECTION)
+// SPORTKUY - PUBLIC DEMO EDITION SAFEGUARDS
 // =========================================================================
-// Nilai 'true' mengaktifkan proteksi master data untuk repositori publik / demo:
-// - Mencegah perubahan kata sandi admin utama & akun demo
-// - Mencegah penghapusan master data lapangan, kategori, admin, dan transaksi
-// Dapat diatur juga via environment variable: DEMO_MODE=false
-$demo_env = getenv('DEMO_MODE');
-define('DEMO_MODE', $demo_env !== false ? filter_var($demo_env, FILTER_VALIDATE_BOOLEAN) : true);
+// This codebase is specifically structured as the Public Demo Edition:
+// - Destructive master data operations (deletion/wipe) are locked to maintain demo sandbox integrity.
+// - Password changes for demonstration accounts are disabled.
+define('DEMO_MODE', true);
+define('PUBLIC_DEMO_EDITION', true);
