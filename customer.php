@@ -1,7 +1,7 @@
 <?php include 'header.php'; ?>
 
-<!-- BREADCRUMB -->
-<div id="breadcrumb">
+<!-- BREADCRUMB (Hidden on mobile) -->
+<div id="breadcrumb" class="hidden-xs">
 	<div class="container">
 		<ul class="breadcrumb">
 			<li><a href="index.php">Home</a></li>
@@ -21,7 +21,7 @@
 
 			<div id="main" class="col-md-9">
 				
-				<h4>DASHBOARD</h4>
+				<h4><?php echo __t('dashboard'); ?></h4>
 
 				<div id="store">
 
@@ -29,7 +29,7 @@
 
 						<div class="col-lg-12">
 							
-							<h5>Halo, Selamat Datang!</h5>
+							<h5><?php echo __t('customer_greeting'); ?></h5>
 
 							<table class="table table-bordered">
 								<tbody>
@@ -39,19 +39,19 @@
 									while($i = mysqli_fetch_array($customer)){
 										?>
 										<tr>
-											<th width="20%">Nama</th>	
+											<th width="20%"><?php echo __t('customer_name'); ?></th>	
 											<td><?php echo $i['customer_nama'] ?></td>
 										</tr>
 										<tr>
-											<th width="20%">Email</th>	
+											<th width="20%"><?php echo __t('customer_email'); ?></th>	
 											<td><?php echo $i['customer_email'] ?></td>
 										</tr>
 										<tr>
-											<th>HP</th>	
+											<th><?php echo __t('customer_phone'); ?></th>	
 											<td><?php echo $i['customer_hp'] ?></td>
 										</tr>
 										<tr>
-											<th>Alamat</th>	
+											<th><?php echo __t('customer_address'); ?></th>	
 											<td><?php echo $i['customer_alamat'] ?></td>
 										</tr>
 										<?php 

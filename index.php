@@ -1,7 +1,7 @@
 <?php include 'header.php'; ?>
 
-<!-- BREADCRUMB -->
-<div id="breadcrumb">
+<!-- BREADCRUMB (Hidden on mobile for native app look) -->
+<div id="breadcrumb" class="hidden-xs">
 	<div class="container">
 		<ul class="breadcrumb">
 			<li><a href="index.php">Home</a></li>
@@ -15,19 +15,19 @@
 	<div class="modern-hero-section">
 		<div class="container">
 			<div class="hero-content-wrapper">
-				<h1 class="hero-title">Sewa Lapangan Olahraga<br>Terfavorit & Terlengkap</h1>
-				<p class="hero-subtitle">Temukan dan booking lapangan Futsal, Badminton, Basketball, hingga Mini Soccer dalam hitungan detik.</p>
+				<h1 class="hero-title"><?php echo __t('hero_title'); ?></h1>
+				<p class="hero-subtitle"><?php echo __t('hero_subtitle'); ?></p>
 				
 				<form action="index.php" method="get">
 					<div class="hero-search-box">
 						<i class="fa fa-search" style="color: #94a3b8; font-size: 18px; margin-left: 15px;"></i>
-						<input type="text" name="cari" placeholder="Cari nama lapangan atau lokasi..." value="<?php if(isset($_GET['cari'])){ echo htmlspecialchars($_GET['cari']); } ?>">
-						<button type="submit" class="hero-search-btn"><i class="fa fa-paper-plane"></i> Cari Lapangan</button>
+						<input type="text" name="cari" placeholder="<?php echo __t('search_placeholder'); ?>" value="<?php if(isset($_GET['cari'])){ echo htmlspecialchars($_GET['cari']); } ?>">
+						<button type="submit" class="hero-search-btn"><i class="fa fa-paper-plane"></i> <?php echo __t('search_btn'); ?></button>
 					</div>
 				</form>
 
 				<div class="hero-chips">
-					<span style="color: #cbd5e1; font-weight: 600; font-size: 13px; align-self: center; margin-right: 5px;">Kategori Populer:</span>
+					<span style="color: #cbd5e1; font-weight: 600; font-size: 13px; align-self: center; margin-right: 5px;"><?php echo __t('popular_categories'); ?></span>
 					<?php 
 					$kat_chips = mysqli_query($koneksi,"SELECT * FROM kategori LIMIT 5");
 					while($kc = mysqli_fetch_array($kat_chips)){
@@ -36,6 +36,42 @@
 					<?php } ?>
 				</div>
 			</div>
+		</div>
+	</div>
+
+	<!-- APP QUICK CATEGORIES (Native Horizontal Pill Carousel on Mobile) -->
+	<div class="visible-xs visible-sm" style="margin-top: 10px; margin-bottom: 5px;">
+		<div class="app-categories-strip">
+			<a href="index.php" class="category-pill active">
+				<i class="fa fa-th-large"></i> <?php echo __t('all'); ?>
+			</a>
+			<?php 
+			$kategori_strip = mysqli_query($koneksi, "SELECT * FROM kategori");
+			$icon_map = [
+				'futsal' => 'fa-soccer-ball-o',
+				'badminton' => 'fa-trophy',
+				'bulu tangkis' => 'fa-trophy',
+				'basket' => 'fa-dribbble',
+				'basketball' => 'fa-dribbble',
+				'mini soccer' => 'fa-futbol-o',
+				'tennis' => 'fa-circle-o',
+				'tenis' => 'fa-circle-o',
+				'voli' => 'fa-bullseye',
+			];
+			while($ks = mysqli_fetch_array($kategori_strip)){
+				$cat_lower = strtolower($ks['kategori_nama']);
+				$c_icon = 'fa-bolt';
+				foreach($icon_map as $key => $icon){
+					if(strpos($cat_lower, $key) !== false){
+						$c_icon = $icon;
+						break;
+					}
+				}
+			?>
+			<a href="lapangan_kategori.php?id=<?php echo $ks['kategori_id']; ?>" class="category-pill">
+				<i class="fa <?php echo $c_icon; ?>"></i> <?php echo $ks['kategori_nama']; ?>
+			</a>
+			<?php } ?>
 		</div>
 	</div>
 </div>
@@ -65,19 +101,19 @@
 							<h3 style="margin: 0; font-size: 20px; font-weight: 800;">
 								<?php 
 								if(isset($_GET['cari'])){
-									echo "Hasil Pencarian: \"".htmlspecialchars($_GET['cari'])."\"";
+									echo __t('search_results_for') . " \"" . htmlspecialchars($_GET['cari']) . "\"";
 								} else {
-									echo "Semua Daftar Lapangan";
+									echo __t('all_venues');
 								}
 								?>
 							</h3>
 						</div>
 						<div class="pull-right">
 							<div class="sort-filter">
-								<span class="text-uppercase" style="font-weight: 700; margin-right: 8px;">Urutkan:</span>
+								<span class="text-uppercase" style="font-weight: 700; margin-right: 8px;"><?php echo __t('sort_by'); ?></span>
 								<select class="input" name="urutan" onchange="this.form.submit()">
-									<option <?php if(isset($_GET['urutan']) && $_GET['urutan'] == "terbaru"){echo "selected='selected'";} ?> value="terbaru">Terbaru</option>
-									<option <?php if(isset($_GET['urutan']) && $_GET['urutan'] == "harga"){echo "selected='selected'";} ?> value="harga">Harga Terendah</option>
+									<option <?php if(isset($_GET['urutan']) && $_GET['urutan'] == "terbaru"){echo "selected='selected'";} ?> value="terbaru"><?php echo __t('sort_latest'); ?></option>
+									<option <?php if(isset($_GET['urutan']) && $_GET['urutan'] == "harga"){echo "selected='selected'";} ?> value="harga"><?php echo __t('sort_price_low'); ?></option>
 								</select>
 							</div>
 						</div>
@@ -91,13 +127,9 @@
 					<div class="row">
 
 						<?php
-						
-
-
 						$halaman = 12;
 						$page = isset($_GET["halaman"]) ? (int)$_GET["halaman"] : 1;
 						$mulai = ($page>1) ? ($page * $halaman) - $halaman : 0;
-						// $result = mysqli_query($koneksi, "SELECT * FROM lapangan");
 
 						if(isset($_GET['urutan']) && $_GET['urutan'] == "harga"){
 							if(isset($_GET['cari'])){
@@ -148,7 +180,7 @@
 											<span><i class="fa fa-tag"></i> <?php echo $d['kategori_nama'] ?></span>
 										</div>
 
-										<a href="lapangan_detail.php?id=<?php echo $d['lapangan_id'] ?>" class="main-btn quick-view"><i class="fa fa-eye"></i> Detail</a>
+										<a href="lapangan_detail.php?id=<?php echo $d['lapangan_id'] ?>" class="main-btn quick-view"><i class="fa fa-eye"></i> <?php echo __t('view_detail'); ?></a>
 										
 										<?php if($d['lapangan_foto1'] == ""){ ?>
 											<img src="gambar/sistem/lapangan.png">
@@ -158,10 +190,13 @@
 									</div>
 									<div class="product-body">
 										<h2 class="product-name"><a href="lapangan_detail.php?id=<?php echo $d['lapangan_id'] ?>"><?php echo $d['lapangan_nama']; ?></a></h2>
-										<div class="product-price"><?php echo "Rp. ".number_format($d['lapangan_harga']); ?></div>
+										<div class="product-price">
+											<?php echo "Rp. ".number_format($d['lapangan_harga']); ?>
+											<span style="font-size: 13px; font-weight: 500; color: #64748b;"><?php echo __t('per_session'); ?></span>
+										</div>
 										
 										<div class="product-btns" style="margin-top: 15px;">
-											<a class="primary-btn btn-block text-center" href="lapangan_detail.php?id=<?php echo $d['lapangan_id'] ?>"><i class="fa fa-calendar"></i> Detail & Booking</a>
+											<a class="primary-btn btn-block text-center" href="lapangan_detail.php?id=<?php echo $d['lapangan_id'] ?>"><i class="fa fa-calendar"></i> <?php echo __t('book_now'); ?></a>
 										</div>
 									</div>
 								</div>

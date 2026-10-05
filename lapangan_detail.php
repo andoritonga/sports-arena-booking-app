@@ -1,7 +1,7 @@
 <?php include 'header.php'; ?>
 
-<!-- BREADCRUMB -->
-<div id="breadcrumb">
+<!-- BREADCRUMB (Hidden on mobile) -->
+<div id="breadcrumb" class="hidden-xs">
 	<div class="container">
 		<ul class="breadcrumb">
 			<li><a href="index.php">Home</a></li>
@@ -76,29 +76,29 @@ if($d = mysqli_fetch_array($data)){
 						<span style="font-size: 32px; font-weight: 800; color: var(--color-brand-primary); font-family: var(--font-heading);">
 							<?php echo "Rp. ".number_format($d['lapangan_harga']); ?>
 						</span>
-						<span style="color: var(--color-text-muted); font-size: 15px; font-weight: 600;">/ Jam Sesi</span>
+						<span style="color: var(--color-text-muted); font-size: 15px; font-weight: 600;"><?php echo __t('per_session'); ?></span>
 					</div>
 
 					<!-- SPEC CHIPS -->
 					<div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 30px;">
 						<div style="background: #f1f5f9; padding: 8px 14px; border-radius: var(--radius-md); font-size: 13px; font-weight: 600; color: var(--color-text-main);">
-							<i class="fa fa-shield" style="color: var(--color-brand-primary);"></i> Standar Kompetisi
+							<i class="fa fa-shield" style="color: var(--color-brand-primary);"></i> <?php echo __t('spec_competition'); ?>
 						</div>
 						<div style="background: #f1f5f9; padding: 8px 14px; border-radius: var(--radius-md); font-size: 13px; font-weight: 600; color: var(--color-text-main);">
-							<i class="fa fa-bolt" style="color: #f59e0b;"></i> LED 1000 Lux
+							<i class="fa fa-bolt" style="color: #f59e0b;"></i> <?php echo __t('spec_lighting'); ?>
 						</div>
 						<div style="background: #f1f5f9; padding: 8px 14px; border-radius: var(--radius-md); font-size: 13px; font-weight: 600; color: var(--color-text-main);">
-							<i class="fa fa-shower" style="color: #06b6d4;"></i> Shower & Ruang Ganti
+							<i class="fa fa-shower" style="color: #06b6d4;"></i> <?php echo __t('spec_shower'); ?>
 						</div>
 						<div style="background: #f1f5f9; padding: 8px 14px; border-radius: var(--radius-md); font-size: 13px; font-weight: 600; color: var(--color-text-main);">
-							<i class="fa fa-wifi" style="color: #10b981;"></i> Free WiFi
+							<i class="fa fa-wifi" style="color: #10b981;"></i> <?php echo __t('spec_wifi'); ?>
 						</div>
 					</div>
 
 					<!-- ACTION BUTTON -->
 					<div style="margin-top: auto;">
 						<a class="primary-btn btn-block text-center" href="#schedule-section" style="padding: 16px; font-size: 18px; border-radius: var(--radius-lg);">
-							<i class="fa fa-calendar-check-o"></i> Pilih Jadwal & Booking
+							<i class="fa fa-calendar-check-o"></i> <?php echo __t('action_select_schedule'); ?>
 						</a>
 					</div>
 				</div>
@@ -112,9 +112,9 @@ if($d = mysqli_fetch_array($data)){
 				<div class="form-box" style="padding: 30px;">
 					
 					<ul class="nav nav-tabs" style="border-bottom: 2px solid var(--color-border-light); margin-bottom: 30px;">
-						<li class="active"><a data-toggle="tab" href="#tab-jadwal" style="font-weight: 700; font-size: 16px; padding: 12px 20px;"><i class="fa fa-calendar-check-o" style="color: var(--color-brand-primary);"></i> Jadwal & Sesi Lapangan</a></li>
-						<li><a data-toggle="tab" href="#tab-deskripsi" style="font-weight: 700; font-size: 16px; padding: 12px 20px;"><i class="fa fa-info-circle"></i> Deskripsi & Spesifikasi</a></li>
-						<li><a data-toggle="tab" href="#tab-komentar" style="font-weight: 700; font-size: 16px; padding: 12px 20px;"><i class="fa fa-comments"></i> Ulasan & Komentar</a></li>
+						<li class="active"><a data-toggle="tab" href="#tab-jadwal" style="font-weight: 700; font-size: 16px; padding: 12px 20px;"><i class="fa fa-calendar-check-o" style="color: var(--color-brand-primary);"></i> <?php echo __t('tab_schedule'); ?></a></li>
+						<li><a data-toggle="tab" href="#tab-deskripsi" style="font-weight: 700; font-size: 16px; padding: 12px 20px;"><i class="fa fa-info-circle"></i> <?php echo __t('tab_description'); ?></a></li>
+						<li><a data-toggle="tab" href="#tab-komentar" style="font-weight: 700; font-size: 16px; padding: 12px 20px;"><i class="fa fa-comments"></i> <?php echo __t('tab_reviews'); ?></a></li>
 					</ul>
 
 					<div class="tab-content">
@@ -125,12 +125,12 @@ if($d = mysqli_fetch_array($data)){
 							<!-- 1-CLICK QUICK DATE SELECTOR BAR -->
 							<div style="margin-bottom: 25px;">
 								<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
-									<h4 style="margin: 0; font-size: 18px; font-weight: 800;"><i class="fa fa-calendar" style="color: var(--color-brand-primary);"></i> Pilih Tanggal Permainan:</h4>
+									<h4 style="margin: 0; font-size: 18px; font-weight: 800;"><i class="fa fa-calendar" style="color: var(--color-brand-primary);"></i> <?php echo __t('select_date'); ?></h4>
 									
 									<form class="form-inline" action="lapangan_detail.php" method="GET" style="display: inline-flex; gap: 8px;">
 										<input type="hidden" name="id" value="<?php echo $id_lapangan; ?>">
 										<input autocomplete="off" type="text" value="<?php echo $tanggal; ?>" name="tgl" class="form-control datepicker2" placeholder="Pilih Tanggal Lain" style="max-width: 170px; background: #ffffff; padding: 8px 12px; font-weight: 600;">
-										<button type="submit" class="primary-btn" style="padding: 8px 16px;"><i class="fa fa-search"></i> Cek</button>
+										<button type="submit" class="primary-btn" style="padding: 8px 16px;"><i class="fa fa-search"></i> <?php echo __t('show'); ?></button>
 									</form>
 								</div>
 

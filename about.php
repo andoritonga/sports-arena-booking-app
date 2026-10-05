@@ -1,7 +1,7 @@
 <?php include 'header.php'; ?>
 
-<!-- BREADCRUMB -->
-<div id="breadcrumb">
+<!-- BREADCRUMB (Hidden on mobile) -->
+<div id="breadcrumb" class="hidden-xs">
 	<div class="container">
 		<ul class="breadcrumb">
 			<li><a href="index.php">Home</a></li>
