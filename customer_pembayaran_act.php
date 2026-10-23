@@ -1,31 +1,40 @@
 <?php 
 include 'koneksi.php';
+session_start();
 
-$id = $_POST['id'];
+if (!isset($_SESSION['customer_id'])) {
+	header("location:masuk.php?alert=login-dulu-pesan");
+	exit();
+}
 
-$rand = rand();
-$allowed =  array('gif','png','jpg','jpeg');
+$id_customer = (int)$_SESSION['customer_id'];
+$id = (int)($_POST['id'] ?? 0);
 
-$filename = $_FILES['bukti']['name'];
+// Pastikan invoice milik customer yang sedang login
+$lama = mysqli_query($koneksi, "SELECT * FROM invoice WHERE invoice_id='$id' AND invoice_customer='$id_customer'");
+$l = mysqli_fetch_assoc($lama);
+if (!$l) {
+	header("location:customer_pesanan.php?alert=gagal");
+	exit();
+}
 
-$ext = pathinfo($filename, PATHINFO_EXTENSION);
+$file_gambar = isset($_FILES['bukti']) ? sportkuy_secure_upload_image($_FILES['bukti'], 'gambar/bukti_pembayaran') : null;
 
-if(in_array($ext,$allowed) ) {
+if ($file_gambar !== null) {
+	// Salin juga ke gambar/bukti agar kompatibel dengan modal di halaman admin
+	@mkdir('gambar/bukti', 0755, true);
+	@copy('gambar/bukti_pembayaran/' . $file_gambar, 'gambar/bukti/' . $file_gambar);
 
-	$file_gambar = $rand.'.'.$ext;
+	// Hapus gambar lama jika ada
+	$foto = $l['invoice_bukti'] ?? '';
+	if (!empty($foto)) {
+		$safe_old = basename($foto);
+		@unlink("gambar/bukti_pembayaran/$safe_old");
+		@unlink("gambar/bukti/$safe_old");
+	}
 
-	move_uploaded_file($_FILES['bukti']['tmp_name'], 'gambar/bukti_pembayaran/'.$file_gambar);
-
-	// hapus gambar lama
-	$lama = mysqli_query($koneksi, "select * from invoice where invoice_id='$id'");
-	$l = mysqli_fetch_assoc($lama);
-
-	$foto = $l['invoice_bukti'];
-
-	unlink("gambar/bukti_pembayaran/$foto");
-
-	mysqli_query($koneksi,"update invoice set invoice_bukti='$file_gambar', invoice_status='1' where invoice_id='$id'")or die(mysqli_error($koneksi));
+	mysqli_query($koneksi, "UPDATE invoice SET invoice_bukti='$file_gambar', invoice_status='1' WHERE invoice_id='$id' AND invoice_customer='$id_customer'");
 	header("location:customer_pesanan.php?alert=upload");
-}else{
+} else {
 	header("location:customer_pesanan.php?alert=gagal");
 }

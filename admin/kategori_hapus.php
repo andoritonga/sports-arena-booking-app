@@ -1,10 +1,14 @@
 <?php 
 include '../koneksi.php';
-$id = $_GET['id'];
+session_start();
+if (($_SESSION['status'] ?? '') != "login") {
+	header("location:../login.php?alert=belum_login");
+	exit();
+}
 
-mysqli_query($koneksi, "delete from kategori where kategori_id='$id'");
+$id = (int)($_GET['id'] ?? 0);
 
-
-mysqli_query($koneksi,"update produk set produk_kategori='1' where produk_kategori='$id'");
+mysqli_query($koneksi, "DELETE FROM kategori WHERE kategori_id='$id'");
+mysqli_query($koneksi, "UPDATE lapangan SET lapangan_kategori='1' WHERE lapangan_kategori='$id'");
 
 header("location:kategori.php");

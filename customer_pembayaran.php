@@ -31,9 +31,9 @@
 							<table class="table table-bordered">
 								<tbody>
 									<?php 
-									$id_invoice = $_GET['id'];
+									$id_invoice = mysqli_real_escape_string($koneksi, $_GET['id']);
 									$id = $_SESSION['customer_id'];
-									$invoice = mysqli_query($koneksi,"select * from invoice where invoice_customer='$id' and invoice_id='$id' order by invoice_id desc");
+									$invoice = mysqli_query($koneksi,"select * from invoice where invoice_customer='$id' and invoice_id='$id_invoice' order by invoice_id desc");
 									while($i = mysqli_fetch_array($invoice)){
 										?>
 										<tr>

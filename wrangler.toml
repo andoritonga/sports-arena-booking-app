@@ -1,0 +1,18 @@
+name = "sportkuy"
+main = "src/index.ts"
+compatibility_date = "2025-02-01"
+
+# Static Assets (100% Free on Cloudflare Workers)
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+# Cloudflare D1 Database (100% Free Tier, no credit card required)
+[[d1_databases]]
+binding = "DB"
+database_name = "sportkuy-db"
+database_id = "1ef26da1-c250-4da6-ae27-3506f92f1125"
+migrations_dir = "migrations"
+
+[vars]
+SESSION_SECRET = "sportkuy-edge-hmac-secret-key-2026"

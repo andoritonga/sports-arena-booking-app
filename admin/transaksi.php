@@ -120,8 +120,9 @@
                                 if($i['invoice_bukti'] == ""){
                                   echo "<div class='alert alert-warning' style='margin: 0;'><i class='fa fa-info-circle'></i> Bukti pembayaran belum diupload oleh pembeli/customer.</div>";
                                 }else{
+                                  $bukti_path = file_exists("../gambar/bukti/" . $i['invoice_bukti']) ? "../gambar/bukti/" . $i['invoice_bukti'] : "../gambar/bukti_pembayaran/" . $i['invoice_bukti'];
                                   ?>
-                                  <img src="../gambar/bukti/<?php echo $i['invoice_bukti']; ?>" style="max-width: 100%; max-height: 450px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
+                                  <img src="<?php echo $bukti_path; ?>" style="max-width: 100%; max-height: 450px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
                                   <?php
                                 }
                                 ?>

@@ -1,0 +1,29 @@
+# Anti-php2shell protection: Never execute scripts in upload directories
+Options -ExecCGI -Includes -Indexes
+RemoveHandler .php .phtml .php3 .php4 .php5 .php7 .php8 .phar .inc
+RemoveType .php .phtml .php3 .php4 .php5 .php7 .php8 .phar .inc
+
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php7.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php8.c>
+    php_flag engine off
+</IfModule>
+
+<FilesMatch "(?i)\.(php|phtml|php[0-9]|phar|inc|pl|py|cgi|sh|bash|exe|htaccess)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set Content-Security-Policy "default-src 'none'; img-src 'self'; style-src 'unsafe-inline'"
+</IfModule>

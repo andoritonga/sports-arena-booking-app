@@ -1,26 +1,26 @@
 <?php 
 include '../koneksi.php';
-$nama  = $_POST['nama'];
-$username = $_POST['username'];
-$password = md5($_POST['password']);
+session_start();
+if (($_SESSION['status'] ?? '') != "login") {
+	header("location:../login.php?alert=belum_login");
+	exit();
+}
 
-$rand = rand();
-$allowed =  array('gif','png','jpg','jpeg');
-$filename = $_FILES['foto']['name'];
+$nama  = mysqli_real_escape_string($koneksi, $_POST['nama'] ?? '');
+$username = mysqli_real_escape_string($koneksi, $_POST['username'] ?? '');
+$password = md5($_POST['password'] ?? '');
 
-if($filename == ""){
-	mysqli_query($koneksi, "insert into admin values (NULL,'$nama','$username','$password','')");
+$filename = $_FILES['foto']['name'] ?? '';
+
+if ($filename == "") {
+	mysqli_query($koneksi, "INSERT INTO admin VALUES (NULL,'$nama','$username','$password','')");
 	header("location:admin.php");
-}else{
-	$ext = pathinfo($filename, PATHINFO_EXTENSION);
-
-	if(!in_array($ext,$allowed) ) {
+} else {
+	$file_gambar = sportkuy_secure_upload_image($_FILES['foto'], '../gambar/user');
+	if ($file_gambar === null) {
 		header("location:admin.php?alert=gagal");
-	}else{
-		move_uploaded_file($_FILES['foto']['tmp_name'], '../gambar/user/'.$rand.'_'.$filename);
-		$file_gambar = $rand.'_'.$filename;
-		mysqli_query($koneksi, "insert into admin values (NULL,'$nama','$username','$password','$file_gambar')");
+	} else {
+		mysqli_query($koneksi, "INSERT INTO admin VALUES (NULL,'$nama','$username','$password','$file_gambar')");
 		header("location:admin.php");
 	}
 }
-

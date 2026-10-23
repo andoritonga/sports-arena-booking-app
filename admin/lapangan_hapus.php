@@ -19,8 +19,9 @@ $data = mysqli_query($koneksi, "select * from transaksi where transaksi_lapangan
 while($d=mysqli_fetch_array($data)){
 	$id_invoice = $d['transaksi_invoice'];
 
-	mysqli_query($koneksi, "delete from invoice where invoice_id='$id'");
+	mysqli_query($koneksi, "delete from invoice where invoice_id='$id_invoice'");
 }
+mysqli_query($koneksi, "delete from invoice where invoice_lapangan='$id'");
 
 mysqli_query($koneksi, "delete from transaksi where transaksi_lapangan='$id'");
 

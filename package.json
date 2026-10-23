@@ -1,0 +1,21 @@
+{
+  "name": "sportkuy-cloudflare",
+  "version": "2.0.0",
+  "private": true,
+  "description": "SportKuy - Modern Sports Arena Booking & Management System on Cloudflare Workers + D1",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:init:local": "wrangler d1 execute sportkuy-db --local --file=./migrations/0001_init.sql",
+    "db:init:remote": "wrangler d1 execute sportkuy-db --remote --file=./migrations/0001_init.sql",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "hono": "^4.7.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250214.0",
+    "typescript": "^5.7.3",
+    "wrangler": "^3.109.0"
+  }
+}
