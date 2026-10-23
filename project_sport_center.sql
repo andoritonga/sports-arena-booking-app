@@ -40,7 +40,7 @@ CREATE TABLE `admin` (
 LOCK TABLES `admin` WRITE;
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
 INSERT INTO `admin` VALUES
-(1,'Ando Ritonga','admin','21232f297a57a5a743894a0e4a801fc3','1352025327_avatar.png'),
+(1,'Administrator','admin','21232f297a57a5a743894a0e4a801fc3','1352025327_avatar.png'),
 (8,'sosunser','sosun','14134e4e2a0d3dd5035763936ca75621','924622752_President_University_Logo.png');
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -73,8 +73,8 @@ INSERT INTO `customer` VALUES
 (8,'Michael Carrick','carras16@gmail.com','081616161616','Villa Mutiara Jaya Blok M89 No 44','e10adc3949ba59abbe56e057f20f883e'),
 (9,'Cristiano Ronaldo','ronaldo7@gmail.com','087777777777','Berlin, Italy','41a8cfe1555e6bd0a854357b53ece69a'),
 (10,'Sosunser','sosunser@jmail.com','081314567891','DESA asahi','0b5029f7c2b1f8894d5d7a0300cf10a2'),
-(11,'Ando Ritonga','andoritonga@gmail.com','081372237921','Manchester','4e782c983e2a4c7986e48c799ec63aea'),
-(13,'Yohannes Christiando Ritonga','ritongando@gmail.com','081372237921','XLSMART TELECOM SEJAHTERA','21232f297a57a5a743894a0e4a801fc3');
+(11,'Budi Santoso','budi@example.com','081234567890','Jakarta','4e782c983e2a4c7986e48c799ec63aea'),
+(13,'Andi Pratama','andi@example.com','081234567890','Bandung','21232f297a57a5a743894a0e4a801fc3');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,7 +114,7 @@ INSERT INTO `invoice` VALUES
 (86,21,'2021-08-19',10,'Sosunser','081314567891','2021-08-19','20.00','22.00',100000,200000,2,''),
 (87,21,'2021-09-15',10,'Sosunser','081314567891','2021-09-16','16.00','18.00',100000,200000,2,'1277357085.jpg'),
 (88,21,'2021-12-18',10,'Sosunser','081314567891','2021-12-19','17.00','19.00',100000,200000,3,'1258567231.gif'),
-(89,16,'2026-09-09',13,'Yohannes Christiando Ritonga','081372237921','2026-09-09','15.00','17.00',30000,60000,3,'');
+(89,16,'2026-09-09',13,'Andi Pratama','081234567890','2026-09-09','15.00','17.00',30000,60000,3,'');
 /*!40000 ALTER TABLE `invoice` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1820,10 +1820,10 @@ CREATE TABLE `komentar` (
 LOCK TABLES `komentar` WRITE;
 /*!40000 ALTER TABLE `komentar` DISABLE KEYS */;
 INSERT INTO `komentar` VALUES
-(2,21,11,'Ando Ritonga','2021-05-14','Bola nya jelek, tolong dibeli lagi bola yang baru dan bagus'),
+(2,21,11,'Budi Santoso','2021-05-14','Bola nya jelek, tolong dibeli lagi bola yang baru dan bagus'),
 (3,21,8,'Michael Carrick','2021-05-16','What a field! I can do my best in this beautiful field!'),
 (4,21,9,'Cristiano Ronaldo','2021-05-07','Numero uno!!'),
-(6,14,11,'Ando Ritonga','2021-05-11','I Love You!'),
+(6,14,11,'Budi Santoso','2021-05-11','I Love You!'),
 (9,21,8,'Michael Carrick','2021-05-19','I Love This Game!! Hahahaha'),
 (11,16,10,'Sosunser','2021-05-19','Lapangannya kurang bagus, netnya udah ada yg jebol'),
 (23,21,10,'Sosunser','2021-12-18','Lapangannya Bagus, baru diperbaiki dan kualitasnya sangat baik');

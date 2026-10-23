@@ -1,4 +1,4 @@
-name = "sportkuy"
+name = "sportkuy-demo"
 main = "src/index.ts"
 compatibility_date = "2025-02-01"
 
@@ -11,8 +11,8 @@ binding = "ASSETS"
 [[d1_databases]]
 binding = "DB"
 database_name = "sportkuy-db"
-database_id = "1ef26da1-c250-4da6-ae27-3506f92f1125"
+database_id = "00000000-0000-0000-0000-000000000000"
 migrations_dir = "migrations"
 
 [vars]
-SESSION_SECRET = "sportkuy-edge-hmac-secret-key-2026"
+SESSION_SECRET = "change-this-to-a-secure-random-secret-key"
